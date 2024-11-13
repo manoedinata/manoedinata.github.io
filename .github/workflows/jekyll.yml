@@ -33,6 +33,8 @@ concurrency:
 jobs:
   # Update submodule job
   update_submodule:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     outputs:
       submodule_updated: ${{ steps.update_submodule.outputs.submodule_updated }}
