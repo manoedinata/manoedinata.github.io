@@ -47,7 +47,6 @@ jobs:
         run: |
           git submodule init
           git submodule update --remote --merge
-          git -C _posts checkout posts
       - name: Check if submodule updated
         id: update_submodule
         run: |
@@ -57,7 +56,8 @@ jobs:
           if git diff --submodule | grep -q '_posts'; then
             echo "submodule_updated=true" >> $GITHUB_ENV
             echo "::set-output name=submodule_updated::true"
-            git commit -am "Update submodule"
+            git add .
+            git commit -m "Update submodule"
             git push
           else
             echo "submodule_updated=false" >> $GITHUB_ENV
