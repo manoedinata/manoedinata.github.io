@@ -1,12 +1,12 @@
 ---
-title: "PostmarketOS, Turning Phones to Linux Systems"
+title: 'PostmarketOS, Turning Phones to Linux Systems'
 categories:
   - Linux
   - postmarketOS
   - English
 tags:
   - linux
-excerpt: "Reducing e-waste. Why not using old phones as small home servers?"
+excerpt: Reducing e-waste. Why not using old phones as small home servers?
 ---
 
 I have two unused Samsung phones laying around, those are Samsung Galaxy J4 (2018, codenamed `j4lte`) and Samsung Galaxy A51 (2019, codenamed `a51`). For some time, I've been planning to make use of these phones. I was like, "_I spent money on these, there's no way I'll let these phones neglected in my drawer._"
