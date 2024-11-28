@@ -1,16 +1,13 @@
 prose:
   ignore:
-    - index.md
-    - _config.yml
-    - /_layouts
-    - /_includes
+    - README.md
+    - _prose.yml
   metadata:
     "":
       - name: "title"
         field:
           element: "text"
           label: "title"
-          placeholder: "Post title"
       - name: "categories"
         field:
           element: "multiselect"
