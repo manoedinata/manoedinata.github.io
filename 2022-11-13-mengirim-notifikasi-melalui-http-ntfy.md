@@ -1,5 +1,5 @@
 ---
-title: "Mengirim Notifikasi Melalui HTTP Request dengan ntfy.sh"
+title: Mengirim Notifikasi Melalui HTTP Request dengan ntfy.sh
 categories:
   - Tools
   - Indonesia
@@ -7,7 +7,7 @@ tags:
   - ntfy
 ---
 
-[ntfy.sh](https://ntfy.sh) adalah sebuah layanan notifikasi berbasis koneksi HTTP buatan Philipp C. Heckel. Dengan menggunakan layanan ini, kita dapat mengirim notifikasi apa saja ke perangkat dengan menggunakan HTTP request yaitu POST atau PUT. Adanya layanan ini memudahkan kita untuk mengirim sebuah notifikasi ataupun peringatan ke perangkat kita dimana saja dan kapan saja, seperti pada saat keadaan darurat dan sebagainya.
+[ntfy.sh](https://ntfy.sh) adalah sebuah layanan notifikasi berbasis koneksi HTTP buatan Philipp C. Heckel. Dengan menggunakan layanan ini, kita dapat mengirim notifikasi apa saja ke perangkat dengan menggunakan HTTP request yaitu POST atau PUT. Adanya layanan ini memudahkan kita untuk mengirim sebuah notifikasi ataupun peringatan ke perangkat kita dimana saja dan kapan saja, seperti pada saat keadaan darurat, _security breach_, dan sebagainya.
 
 <!--more-->
 
