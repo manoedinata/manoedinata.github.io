@@ -1,0 +1,25 @@
+prose:
+  ignore:
+    - index.md
+    - _config.yml
+    - /_layouts
+    - /_includes
+  metadata:
+    "":
+      - name: "title"
+        field:
+          element: "text"
+          label: "title"
+          placeholder: "Post title"
+      - name: "categories"
+        field:
+          element: "multiselect"
+          label: "Add Categories"
+          placeholder: "Add Categories"
+          alterable: true
+      - name: "tags"
+        field:
+          element: "multiselect"
+          label: "Add Tags"
+          placeholder: "Add Tags"
+          alterable: true
