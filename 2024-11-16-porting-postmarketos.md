@@ -1,9 +1,7 @@
 ---
 title: 'PostmarketOS, Turning Phones to Linux Systems'
 categories:
-  - Linux
   - postmarketOS
-  - English
 tags:
   - linux
 excerpt: Reducing e-waste. Why not using old phones as small home servers?
