@@ -20,3 +20,8 @@ prose:
           label: "Add Tags"
           placeholder: "Add Tags"
           alterable: true
+      - name: "excerpt"
+        field:
+          element: "text"
+          label: "Add Excerpt"
+          placeholder: "Add Excerpt"
