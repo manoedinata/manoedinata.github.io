@@ -3,7 +3,7 @@ title: Docker on postmarketOS
 categories:
   - postmarketOS
 ---
-After successfully [running postmarketOS on my old Samsung Galaxy J4](https://manoedinata.com/porting-postmarketos/), it's time to take it further: **Running Docker to self-host local applications**.
+After successfully [running postmarketOS on my old Samsung Galaxy J4](https://manoedinata.com/porting-postmarketos/#samsung-galaxy-j4), it's time to take it even further: **Running Docker to self-host local applications**.
 
 Since postmarketOS runs Alpine Linux natively, there's no need to run VMs, chroot, or whatever it is. Just native. Ain't that cool?
 
@@ -47,4 +47,36 @@ Open `/etc/rc.conf`, search for `rc_group_mode`, then set it to either `hybrid` 
 rc_cgroup_mode="hybrid"
 ```
 
-> WIP. Gist: <https://gist.github.com/manoedinata/d93549d85acbee94f37683fa6cbd626e>
+# Switching to iptables-legacy
+
+Trying to manually run dockerd results in this error:
+
+```
+INFO[2024-11-10T11:34:25.208702609+07:00] unable to detect if iptables supports xlock: 'iptables --wait -L -n': `# Warning: iptables-legacy tables present, use iptables-legacy to see them
+iptables v1.8.10 (nf_tables): Could not fetch rule set generation id: Invalid argument`  error="exit status 4"
+```
+
+Switching to iptables-legacy seems to fix this problem, whether permanently or temporary. To switch, link iptables-legacy to the original iptables binary.
+
+```
+sudo apk add iptables-legacy
+
+# Rename original iptables
+sudo mv /usr/sbin/iptables /usr/sbin/iptables-original
+sudo mv /usr/sbin/ip6tables /usr/sbin/ip6tables-original
+sudo mv /usr/sbin/arptables /usr/sbin/arptables-original
+sudo mv /usr/sbin/ebtables /usr/sbin/ebtables-original
+
+# Link iptables-legacy to iptables
+sudo ln -s /usr/sbin/iptables-legacy /usr/sbin/iptables
+sudo ln -s /usr/sbin/ip6tables-legacy /usr/sbin/ip6tables
+sudo ln -s /usr/sbin/arptables-legacy /usr/sbin/arptables
+sudo ln -s /usr/sbin/ebtables-legacy /usr/sbin/ebtables
+```
+
+# Starting Docker
+
+```
+sudo service docker start
+sudo rc-update add docker default
+```
