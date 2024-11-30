@@ -48,6 +48,8 @@ Open `/etc/rc.conf`, search for `rc_group_mode`, then set it to either `hybrid` 
 rc_cgroup_mode="hybrid"
 ```
 
+![384658061-e76e1790-7f6a-4382-8fcb-ce1abdf49e83.png]({{site.baseurl}}/media/384658061-e76e1790-7f6a-4382-8fcb-ce1abdf49e83.png)
+
 # Switching to iptables-legacy
 
 Trying to manually run dockerd results in this error:
@@ -81,3 +83,10 @@ sudo ln -s /usr/sbin/ebtables-legacy /usr/sbin/ebtables
 sudo service docker start
 sudo rc-update add docker default
 ```
+
+# Testing
+
+![384660205-f565a681-05fa-45fe-9902-eec4f514061b.png]({{site.baseurl}}/media/384660205-f565a681-05fa-45fe-9902-eec4f514061b.png)
+
+![384660185-7f4de3c9-9581-4040-9820-b6c8a327b891.png]({{site.baseurl}}/media/384660185-7f4de3c9-9581-4040-9820-b6c8a327b891.png)
+
