@@ -1,4 +1,5 @@
 prose:
+  media: "media"
   ignore:
     - README.md
     - _prose.yml
