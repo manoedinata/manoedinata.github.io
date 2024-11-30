@@ -1,4 +1,5 @@
 prose:
+  siteurl: "https://manoedinata.com"
   media: "media"
   ignore:
     - README.md
