@@ -1,5 +1,5 @@
 ---
-title: "Akses Root Berbasis Kernel Menggunakan KernelSU"
+title: Akses Root Berbasis Kernel Menggunakan KernelSU
 categories:
   - Android
   - Indonesia
@@ -62,4 +62,4 @@ Mau tidak mau, saya harus meng-compile kernel saya sendiri untuk menambahkan Ker
 
 Hasilnya? _Ta-daa!_ Kernel dengan KernelSU!
 
-![](https://miro.medium.com/v2/resize:fit:828/format:webp/0*o3XON51xkQiWcHu_)
+![0_o3XON51xkQiWcHu_.webp]({{site.baseurl}}/media/0_o3XON51xkQiWcHu_.webp)
