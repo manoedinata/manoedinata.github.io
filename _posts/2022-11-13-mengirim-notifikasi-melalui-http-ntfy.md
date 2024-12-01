@@ -33,11 +33,11 @@ $ curl ntfy.sh/manoe-test -X POST \
 
 Contoh notifikasi yang masuk:
 
-![Contoh notifikasi](https://i.ibb.co.com/7WNJNWD/1-EZmu-Fee-BIu0-Ms-Q-lg45v3w.png)
+![Contoh notifikasi]({{site.baseurl}}/media/1-EZmu-Fee-BIu0-Ms-Q-lg45v3w.png)
 
 Contoh notifikasi dengan judul, tags, dan bersifat urgent:
 
-![Contoh notifikasi dengan judul, tags, dan urgent](https://i.ibb.co.com/tDS0Stm/1-vc-U7-UK1-Uvzh-HKZYQS3mg.png)
+![Contoh notifikasi dengan judul, tags, dan urgent]({{site.baseurl}}/media/1-vc-U7-UK1-Uvzh-HKZYQS3mg.png)
 
 # Kesimpulan
 
