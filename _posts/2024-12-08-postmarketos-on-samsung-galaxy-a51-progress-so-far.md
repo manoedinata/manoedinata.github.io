@@ -7,10 +7,12 @@ Now, to be honest, porting pmOS onto this device is more beneficial than the las
 
 Well, not yet.
 
-# It Boots, Finally
+# It Boots, Finally...
 
 After some numerous, desperate attempts trying to build pmOS for this device (heck, even getting the kernel compiled is kinda hard), I managed to boot it. With the help of [@map220v](https://github.com/map220v)'s A51 Linux kernel source, which he used for postmarketOS as well some years ago, I got the required patches to fix some weird issues, mostly about DECON and framebuffer.
 
 I also had to fix some compilation issues, which 90% of them are just warnings treated as errors. I ain't got time to fix all of 'em, so I removed all of `-Werror` during package build. It's dirty fix, yes, but [even postmarketOS recommends us doing so](https://wiki.postmarketos.org/wiki/Troubleshooting:kernel#Android_Kernel_compilation_fails_on_warnings_(not_on_errors)_(-Werror)).
+
+Here's the [modified kernel source used for the porting](https://github.com/manoedinata/android_kernel_samsung_a51/tree/linux/) and the [pmaports](https://gitlab.postmarketos.org/manoedinata/pmaports/-/tree/manoedinata/add-samsung-a51) (not yet submitted into official pmaports until I fixed all major issues).
 
 [TBA]
