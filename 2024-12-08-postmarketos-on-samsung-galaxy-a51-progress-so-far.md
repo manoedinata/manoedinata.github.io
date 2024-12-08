@@ -9,6 +9,6 @@ Well, not yet.
 
 # It Boots, Finally
 
-After some numerous desperate attempts trying to build pmOS for this device (heck, even
+After some numerous desperate attempts trying to build pmOS for this device (heck, even getting the kernel compiled is kinda hard), I managed to boot it. With the help of [@map220v](https://github.com/map220v)'s A51 Linux kernel source, which he used for postmarketOS as well some years ago, I got the required patches to fix some weird issues, mostly about DECON and framebuffer
 
 [TBA]
