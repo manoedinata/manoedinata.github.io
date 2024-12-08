@@ -13,6 +13,8 @@ After some numerous, desperate attempts trying to build pmOS for this device (he
 
 I also had to fix some compilation issues, which 90% of them are just warnings treated as errors. I ain't got time to fix all of 'em, so I removed all of `-Werror` during package build. It's dirty fix, yes, but [even postmarketOS recommends us doing so](https://wiki.postmarketos.org/wiki/Troubleshooting:kernel#Android_Kernel_compilation_fails_on_warnings_(not_on_errors)_(-Werror)).
 
+![postmarketOS on Samsung Galaxy A51, with XFCE 4](https://wiki.postmarketos.org/images/thumb/e/e4/A51-xfce-basic.jpg/337px-A51-xfce-basic.jpg)
+
 Here's the [modified kernel source used for the porting](https://github.com/manoedinata/android_kernel_samsung_a51/tree/linux/) and the [pmaports](https://gitlab.postmarketos.org/manoedinata/pmaports/-/tree/manoedinata/add-samsung-a51) (not yet submitted into official pmaports until I fixed all major issues).
 
 [TBA]
