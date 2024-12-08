@@ -15,6 +15,6 @@ I also had to fix some compilation issues, which 90% of them are just warnings t
 
 ![postmarketOS on Samsung Galaxy A51, with XFCE 4](https://wiki.postmarketos.org/images/thumb/e/e4/A51-xfce-basic.jpg/337px-A51-xfce-basic.jpg)
 
-Here's the [modified kernel source used for the porting](https://github.com/manoedinata/android_kernel_samsung_a51/tree/linux/) and the [pmaports](https://gitlab.postmarketos.org/manoedinata/pmaports/-/tree/manoedinata/add-samsung-a51) (not yet submitted into official pmaports until I fixed all major issues).
+Here's the [modified kernel source used](https://github.com/manoedinata/android_kernel_samsung_a51/tree/linux/) and the [pmaports](https://gitlab.postmarketos.org/manoedinata/pmaports/-/tree/manoedinata/add-samsung-a51) (not yet submitted into official pmaports until I fixed all major issues).
 
 [TBA]
