@@ -1,8 +1,19 @@
 ---
 permalink: /about/
-title: "About"
+title: About
 ---
+Hi there! 👋
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+My name is Hendra Manudinata. This blog is a collection of things that I find interesting, with some ramblings about my other passions/interests strewn about.
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+I'm also known as @manoedinata on the Internet. _manoedinata_ is actually my last name, but intentionally converted into Indonesian's EYD (_Ejaan Yang Disempurnakan_, which translates to _Enhanced Spelling System_). Don't call me IRL with that username!
+
+I tinker with Android, Linux, and a little bit of IoT & microcontrollers, but now I mostly work on web applications. Most of my projects are made FOSS and can be found here:
+
+* https://github.com/manoedinata
+* https://gitlab.com/manoedinata
+
+I can be reached in the following places:
+
+* Telegram: [@manoedinata](https://t.me/manoedinata)
+* Matrix: @manoedinata:matrix.org
