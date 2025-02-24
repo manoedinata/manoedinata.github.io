@@ -1,11 +1,30 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <section id="hero" class="hero section dark-background">
+    <img src="../assets/img/hero-bg.jpg" alt="" data-aos="fade-in" />
+
+    <div class="container" data-aos="zoom-out" data-aos-delay="100">
+      <h2>
+        <span
+          class="typed"
+          data-typed-items="Hendra Manudinata, Hendra, <i>manoedinata</i>"
+        ></span>
+        <span class="typed-cursor typed-cursor--blink"></span>
+      </h2>
+      <p>Student by day, <span>ambitious developer by night.</span></p>
+      <div class="social-links">
+        <a href="https://github.com/manoedinata"><i class="bi bi-github"></i></a
+        >
+        <a href="https://www.linkedin.com/in/manoedinata/"
+          ><i class="bi bi-linkedin"></i></a
+        >
+        <a href="https://instagram.com/manoedinata"
+          ><i class="bi bi-instagram"></i></a
+        >
+      </div>
+    </div>
+  </section>
 </Layout>
