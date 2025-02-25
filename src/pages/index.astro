@@ -1,5 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+import About from "../components/About.astro";
+import Interests from "../components/Interests.astro";
+
+const interests = [
+  { icon: "bi bi-git", name: "Git" },
+  { icon: "bi bi-code", name: "Programming" },
+  { icon: "bi bi-laptop", name: "Web Development" },
+  { icon: "bi bi-terminal", name: "CLI" },
+];
 ---
 
 <Layout>
@@ -27,4 +37,26 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
   </section>
+
+  <About>
+    <h1>Hi there! 👋</h1>
+    <p class="fs-5">
+      I'm Hendra Manudinata, but you can call me Hendra. I'm a student and
+      computer hobbyist from Indonesia. Currently I'm in High School and
+      developing some personal projects in my free time.
+    </p>
+    <p class="fs-5">
+      I started learning programming languages since I was in 4th grade. During
+      the COVID-19 pandemic, I improved my programming skills by more popular
+      languages e.g. Python, and C++. Right now, I'm learning JavaScript as well
+      as web frameworks such as Vue, Astro, etc.
+    </p>
+    <p class="fs-5">
+      I have many interests of technology. While I'm currently learning web
+      development, I also interested in the field of cyber security and Internet
+      of Things (IoT).
+    </p>
+  </About>
+
+  <Interests interests={interests} />
 </Layout>
