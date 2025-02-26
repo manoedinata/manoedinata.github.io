@@ -1,0 +1,49 @@
+---
+import PageTitle from "../components/PageTitle.astro";
+import Layout from "../layouts/Layout.astro";
+
+const allPosts = Object.values(
+  await import.meta.glob("./posts/*.md", { eager: true }),
+);
+---
+
+<Layout>
+  <PageTitle
+    title="Posts"
+    description="My thoughts about something that interest me."
+    center={true}
+  />
+  <!-- Posts Section -->
+  <section id="posts" class="section">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4">
+        {
+          allPosts.map((post: any) => (
+            <div class="col-lg-4 col-12 content">
+              <div class="card">
+                {post.frontmatter.image && (
+                  <img
+                    src={post.frontmatter.image}
+                    class="card-img-top"
+                    alt="..."
+                  />
+                )}
+
+                <div class="card-body">
+                  <h3 class="card-title">{post.frontmatter.title}</h3>
+                  <p class="card-text">{post.frontmatter.description}</p>
+                  <a
+                    href={post.url}
+                    class="btn btn-outline-dark stretched-link"
+                  >
+                    Open →
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div><!-- /About Section -->
+  </section>
+</Layout>
