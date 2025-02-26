@@ -12,6 +12,7 @@ collections:
     label: "Blog posts" # Used in the UI
     folder: "src/pages/posts" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
+    identifier_field: "slug"
     slug: "{{slug}}" # Uses the title field by default (or custom slug if provided)
     fields: # The fields for each document, usually in frontmatter
       - {
