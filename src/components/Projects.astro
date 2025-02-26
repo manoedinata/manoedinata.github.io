@@ -19,29 +19,39 @@ const { projects } = Astro.props;
       data-aos-delay="200"
     >
       {
-        projects.map((project: any) => (
-          <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-            <div class="portfolio-content h-100">
-              <img src={project.frontmatter.image} class="img-fluid" alt="" />
-              <div class="portfolio-info">
-                <h4>{project.frontmatter.title}</h4>
-                <p>{project.frontmatter.description}</p>
-                <a
-                  href={project.frontmatter.image}
-                  title={project.frontmatter.title}
-                  data-gallery="portfolio-gallery-app"
-                  class="glightbox preview-link"
-                >
-                  <i class="bi bi-zoom-in" />
-                </a>
-                <a href={project.url} title="More Details" class="details-link">
-                  <i class="bi bi-link-45deg" />
-                </a>
+        projects.length === 0 ? (
+          <p>
+            <i>To be added!</i>
+          </p>
+        ) : (
+          projects.map((project: any) => (
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <div class="portfolio-content h-100">
+                <img src={project.frontmatter.image} class="img-fluid" alt="" />
+                <div class="portfolio-info">
+                  <h4>{project.frontmatter.title}</h4>
+                  <p>{project.frontmatter.description}</p>
+                  <a
+                    href={project.frontmatter.image}
+                    title={project.frontmatter.title}
+                    data-gallery="portfolio-gallery-app"
+                    class="glightbox preview-link"
+                  >
+                    <i class="bi bi-zoom-in" />
+                  </a>
+                  <a
+                    href={project.url}
+                    title="More Details"
+                    class="details-link"
+                  >
+                    <i class="bi bi-link-45deg" />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        ))
-      }
-    </div><!-- End Portfolio Container -->
+          ))
+        )
+      }<!-- End Portfolio Container -->
+    </div>
   </div>
 </section>
