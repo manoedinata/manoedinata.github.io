@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 
 import About from "../components/About.astro";
 import Interests from "../components/Interests.astro";
+import Projects from "../components/Projects.astro";
 
 const interests = [
   { icon: "bi bi-git", name: "Git" },
@@ -10,6 +11,11 @@ const interests = [
   { icon: "bi bi-laptop", name: "Web Development" },
   { icon: "bi bi-terminal", name: "CLI" },
 ];
+
+const allProjects = Object.values(
+  await import.meta.glob("./projects/*.md", { eager: true }),
+);
+console.log(allProjects);
 ---
 
 <Layout>
@@ -59,4 +65,6 @@ const interests = [
   </About>
 
   <Interests interests={interests} />
+
+  <Projects projects={allProjects} />
 </Layout>

@@ -1,0 +1,49 @@
+---
+import PageTitle from "../components/PageTitle.astro";
+import Layout from "./Layout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout>
+  <PageTitle title="Project Details" center={true} />
+
+  <!-- Portfolio Details Section -->
+  <section id="portfolio-details" class="portfolio-details section">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4">
+        <div class="col-lg-8">
+          <div class="portfolio-details-slider">
+            <div class="swiper-wrapper align-items-center">
+              <div class="swiper-slide">
+                <img src={frontmatter.image} alt="" />
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+            <h3>Project information</h3>
+            <ul>
+              <li><strong>Category</strong>: Web design</li>
+              <li><strong>Client</strong>: ASU Company</li>
+              <li><strong>Project date</strong>: 01 March, 2020</li>
+              <li>
+                <strong>Project URL</strong>: <a href="#">www.example.com</a>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="portfolio-description"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- /Portfolio Details Section -->
+</Layout>
