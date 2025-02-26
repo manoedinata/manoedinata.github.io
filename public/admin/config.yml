@@ -45,4 +45,10 @@ collections:
       - { label: "Slug", name: "slug", widget: "string", required: false }
       - { label: "Description", name: "description", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
+      - {
+          label: "Project URL",
+          name: "project_url",
+          widget: "string",
+          required: false,
+        }
       - { label: "Body", name: "body", widget: "markdown" }

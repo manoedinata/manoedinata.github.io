@@ -27,11 +27,12 @@ const { frontmatter } = Astro.props;
           <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
             <h3>Project information</h3>
             <ul>
-              <li><strong>Category</strong>: Web design</li>
-              <li><strong>Client</strong>: ASU Company</li>
-              <li><strong>Project date</strong>: 01 March, 2020</li>
+              <li><strong>Description</strong>: {frontmatter.description}</li>
               <li>
-                <strong>Project URL</strong>: <a href="#">www.example.com</a>
+                <strong>Project URL</strong>: <a
+                  href={frontmatter.project_url}
+                  target="_blank">{frontmatter.project_url}</a
+                >
               </li>
             </ul>
           </div>
