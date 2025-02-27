@@ -4,7 +4,7 @@ title: JadwalV2
 slug: jadwalv2-smaboy
 description: Website jadwal pelajaran untuk SMAN 1 Boyolangu, dilengkapi dengan
   notifikasi pengingat melalui bot WhatsApp.
-image: /assets/img/uploads/jadwalv2-smaboy-new.jpg
+image: /assets/img/uploads/jadwalv2-smaboy-resized.jpg
 project_url: https://jadwal.sman1boyolangu.sch.id
 ---
 ## Latar Belakang
