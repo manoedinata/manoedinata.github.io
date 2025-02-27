@@ -5,6 +5,12 @@ import About from "../components/About.astro";
 import Interests from "../components/Interests.astro";
 import Projects from "../components/Projects.astro";
 
+const links = [
+  { icon: "bi bi-github", url: "https://github.com/manoedinata" },
+  { icon: "bi bi-linkedin", url: "https://www.linkedin.com/in/manoedinata/" },
+  { icon: "bi bi-instagram", url: "https://instagram.com/manoedinata" },
+];
+
 const interests = [
   { icon: "bi bi-git", name: "Git" },
   { icon: "bi bi-code", name: "Programming" },
@@ -31,14 +37,13 @@ const allProjects = Object.values(
       </h2>
       <p>Student by day, <span>ambitious developer by night.</span></p>
       <div class="social-links">
-        <a href="https://github.com/manoedinata"><i class="bi bi-github"></i></a
-        >
-        <a href="https://www.linkedin.com/in/manoedinata/"
-          ><i class="bi bi-linkedin"></i></a
-        >
-        <a href="https://instagram.com/manoedinata"
-          ><i class="bi bi-instagram"></i></a
-        >
+        {
+          links.map(({ icon, url }) => (
+            <a href={url} target="_blank">
+              <i class={icon} />
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
