@@ -15,7 +15,6 @@ const interests = [
 const allProjects = Object.values(
   await import.meta.glob("./projects/*.md", { eager: true }),
 );
-console.log(allProjects);
 ---
 
 <Layout>
