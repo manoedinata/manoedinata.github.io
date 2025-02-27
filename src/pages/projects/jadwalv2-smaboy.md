@@ -11,4 +11,4 @@ project_url: https://jadwal.sman1boyolangu.sch.id
 
 Jadwal pelajaran di SMAN 1 Boyolangu untuk seluruh kelas (X, XI, dan XII) disusun menjadi sebuah tabel yang cukup kecil dan rumit untuk dipelajari, karena jadwal ditulis dengan **nomor indeks** guru.
 
-Demi mempermudah siswa dan guru untuk mengecek jadwal, muncul sebuah inisiatif untuk mengonversi tabel yang ada menjadi _website_ yang enak dipandang.
+Demi mempermudah siswa dan guru untuk melihat jadwal, muncul sebuah inisiatif untuk mengonversi tabel yang ada menjadi _website_ yang enak dipandang, dilengkapi dengan fitur tambahan demi memudahkan navigasi data.
