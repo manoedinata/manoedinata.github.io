@@ -6,7 +6,12 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout>
-  <PageTitle title="Project Details" center={true} />
+  <PageTitle
+    title=`Project: ${frontmatter.title}`
+    `
+    description={frontmatter.description}
+    center={true}
+  />
 
   <!-- Portfolio Details Section -->
   <section id="portfolio-details" class="portfolio-details section">
