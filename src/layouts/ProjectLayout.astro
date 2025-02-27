@@ -33,6 +33,7 @@ const { frontmatter } = Astro.props;
             <h3>Project information</h3>
             <ul>
               <li><strong>Description</strong>: {frontmatter.description}</li>
+              <li><strong>Role</strong>: {frontmatter.role}</li>
               <li>
                 <strong>Project URL</strong>: <a
                   href={frontmatter.project_url}
