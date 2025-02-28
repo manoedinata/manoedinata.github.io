@@ -27,12 +27,16 @@ const { projects } = Astro.props;
           projects.map((project: any) => (
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
               <div class="portfolio-content h-100">
-                <img src={project.frontmatter.image} class="img-fluid" alt="" />
+                <img
+                  src={project.frontmatter.images[0]}
+                  class="img-fluid"
+                  alt=""
+                />
                 <div class="portfolio-info">
                   <h4>{project.frontmatter.title}</h4>
                   <p>{project.frontmatter.description}</p>
                   <a
-                    href={project.frontmatter.image}
+                    href={project.frontmatter.images[0]}
                     title={project.frontmatter.title}
                     data-gallery="portfolio-gallery-app"
                     class="glightbox preview-link"

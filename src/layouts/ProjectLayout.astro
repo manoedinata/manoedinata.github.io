@@ -20,9 +20,13 @@ const { frontmatter } = Astro.props;
         <div class="col-lg-8">
           <div class="portfolio-details-slider">
             <div class="swiper-wrapper align-items-center">
-              <div class="swiper-slide">
-                <img src={frontmatter.image} alt="" />
-              </div>
+              {
+                frontmatter.images.map((image: any) => (
+                  <div class="swiper-slide">
+                    <img src={image} alt="" />
+                  </div>
+                ))
+              }
             </div>
             <div class="swiper-pagination"></div>
           </div>
