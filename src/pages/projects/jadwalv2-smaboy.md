@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/ProjectLayout.vue
+layout: ../../layouts/ProjectLayout.astro
 title: JadwalV2
 slug: jadwalv2-smaboy
 description: Website jadwal pelajaran untuk SMAN 1 Boyolangu, dilengkapi dengan

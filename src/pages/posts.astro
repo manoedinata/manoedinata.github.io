@@ -1,6 +1,6 @@
 ---
+import Layout from "../layouts/Layout.astro";
 import PageTitle from "../components/PageTitle.vue";
-import Layout from "../layouts/Layout.vue";
 
 const allPosts = Object.values(
   await import.meta.glob("./posts/*.md", { eager: true }),
@@ -12,6 +12,7 @@ const allPosts = Object.values(
     title="Posts"
     description="My thoughts about something that interest me."
     center={true}
+    client:load
   />
   <!-- Posts Section -->
   <section id="posts" class="section">

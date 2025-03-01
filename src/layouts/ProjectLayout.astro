@@ -1,0 +1,58 @@
+---
+import PageTitle from "../components/PageTitle.vue";
+import Layout from "./Layout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout currentRoute="{Astro.url.pathname}">
+  <PageTitle
+    title=`Project ${frontmatter.title}`
+    description={frontmatter.description}
+    center={true}
+  />
+
+  <!-- Portfolio Details Section -->
+  <section id="portfolio-details" class="portfolio-details section">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4">
+        <div class="col-lg-8">
+          <div class="portfolio-details-slider swiper init-swiper">
+            <div class="swiper-wrapper align-items-center">
+              <div class="swiper-slide" v-for="image in frontmatter.images">
+                <img src={frontmatter.image} alt="" />
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+            <h3>Project information</h3>
+            <ul>
+              <li>
+                <strong>Description</strong>: {frontmatter.description}
+              </li>
+              <li><strong>Role</strong>: {frontmatter.role}</li>
+              <li>
+                <strong>Project URL</strong>:
+                <a href={frontmatter.project_url} target="_blank"
+                  >{frontmatter.project_url}</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div
+            class="portfolio-description"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /Portfolio Details Section -->
+</Layout>

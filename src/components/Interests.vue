@@ -14,7 +14,7 @@ defineProps({
     <div class="container section-title" data-aos="fade-up">
       <h2>Interests</h2>
       <div>
-        <span>I'm</span>
+        <span>I'm </span>
         <span class="description-title">interested in</span>
       </div>
     </div>

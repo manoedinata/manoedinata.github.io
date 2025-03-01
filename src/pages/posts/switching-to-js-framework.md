@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.vue
+layout: ../../layouts/MarkdownPostLayout.astro
 title: Switching to JavaScript Web Framework
 slug: switching-to-js-framework
 description: After some time learning Python for backend development, it's time

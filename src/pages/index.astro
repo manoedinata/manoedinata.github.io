@@ -1,5 +1,5 @@
 ---
-import Layout from "../layouts/Layout.vue";
+import Layout from "../layouts/Layout.astro";
 
 import About from "../components/About.vue";
 import Interests from "../components/Interests.vue";
@@ -27,7 +27,7 @@ const allProjects = Object.values(
 <Layout currentRoute={Astro.url.pathname}>
   <Hero links={links} />
 
-  <About>
+  <About client:load>
     <h1>Hi there! 👋</h1>
     <p class="fs-5">
       I'm Hendra Manudinata, but you can call me <strong>Hendra</strong> or <strong
@@ -48,7 +48,7 @@ const allProjects = Object.values(
     </p>
   </About>
 
-  <Interests interests={interests} />
+  <Interests interests={interests} client:load />
 
-  <Projects projects={allProjects} />
+  <Projects projects={allProjects} client:load />
 </Layout>
