@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.vue";
 import About from "../components/About.vue";
 import Interests from "../components/Interests.vue";
 import Projects from "../components/Projects.vue";
+import Hero from "../components/Hero.vue";
 
 const links = [
   { icon: "bi bi-github", url: "https://github.com/manoedinata" },
@@ -24,30 +25,7 @@ const allProjects = Object.values(
 ---
 
 <Layout currentRoute={Astro.url.pathname}>
-  <section id="hero" class="hero section dark-background">
-    <img src="/assets/img/hero-bg.jpg" alt="" data-aos="fade-in" />
-
-    <div class="container" data-aos="zoom-out" data-aos-delay="100">
-      <h2>
-        <span
-          class="typed"
-          data-typed-items="Hendra Manudinata, Hendra, <i>manoedinata.</i>"
-          >Hendra Manudinata</span
-        >
-        <span class="typed-cursor typed-cursor--blink"></span>
-      </h2>
-      <p>Student by day, <span>ambitious developer by night.</span></p>
-      <div class="social-links">
-        {
-          links.map(({ icon, url }) => (
-            <a href={url} target="_blank">
-              <i class={icon} />
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <Hero links={links} />
 
   <About>
     <h1>Hi there! 👋</h1>
