@@ -19,7 +19,7 @@ collections:
           label: "Layout",
           name: "layout",
           widget: "hidden",
-          default: "../../layouts/MarkdownPostLayout.astro",
+          default: "../../layouts/MarkdownPostLayout.vue",
         }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string", required: false }
@@ -39,7 +39,7 @@ collections:
           label: "Layout",
           name: "layout",
           widget: "hidden",
-          default: "../../layouts/ProjectLayout.astro",
+          default: "../../layouts/ProjectLayout.vue",
         }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string", required: false }

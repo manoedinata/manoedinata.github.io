@@ -1,8 +1,8 @@
 ---
-import PageTitle from "../components/PageTitle.astro";
-import Layout from "../layouts/Layout.astro";
+import PageTitle from "../components/PageTitle.vue";
+import Layout from "../layouts/Layout.vue";
 ---
 
-<Layout>
+<Layout currentRoute={Astro.url.pathname}>
   <PageTitle title="404" description="Page not found" center={true} />
 </Layout>

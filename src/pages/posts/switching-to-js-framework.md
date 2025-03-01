@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
+layout: ../../layouts/MarkdownPostLayout.vue
 title: Switching to JavaScript Web Framework
 slug: switching-to-js-framework
 description: After some time learning Python for backend development, it's time
@@ -7,6 +7,7 @@ description: After some time learning Python for backend development, it's time
 image: https://unsplash.com/photos/eYpcLDXHVb0/download
 date: 2025-02-26T16:57:00.000Z
 ---
+
 I've been learning Python and using it for web development, with [Flask](https://flask.palletsprojects.com/en/stable/) & [FastAPI](https://fastapi.tiangolo.com/). While it suits my need for backend, it doesn't for frontend. Both of them use [Jinja](https://jinja.palletsprojects.com/en/stable/) for its rendering engine, meaning that static HTML are being used. So things like reactivity and JavaScript integrations are not that flexible for being used. Knowing that makes me realize, it's time for an upgrade.
 
 ## Vue.js and Its Beauty

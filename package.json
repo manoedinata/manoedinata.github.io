@@ -9,8 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/vue": "^5.0.7",
     "astro": "^5.3.0",
-    "decap-cms-app": "^3.6.2"
+    "decap-cms-app": "^3.6.2",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "prettier": "^3.5.2",

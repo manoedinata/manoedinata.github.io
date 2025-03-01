@@ -1,9 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/Layout.vue";
 
-import About from "../components/About.astro";
-import Interests from "../components/Interests.astro";
-import Projects from "../components/Projects.astro";
+import About from "../components/About.vue";
+import Interests from "../components/Interests.vue";
+import Projects from "../components/Projects.vue";
 
 const links = [
   { icon: "bi bi-github", url: "https://github.com/manoedinata" },
@@ -23,7 +23,7 @@ const allProjects = Object.values(
 );
 ---
 
-<Layout>
+<Layout currentRoute={Astro.url.pathname}>
   <section id="hero" class="hero section dark-background">
     <img src="/assets/img/hero-bg.jpg" alt="" data-aos="fade-in" />
 

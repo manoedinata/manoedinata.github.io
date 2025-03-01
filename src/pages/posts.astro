@@ -1,13 +1,13 @@
 ---
-import PageTitle from "../components/PageTitle.astro";
-import Layout from "../layouts/Layout.astro";
+import PageTitle from "../components/PageTitle.vue";
+import Layout from "../layouts/Layout.vue";
 
 const allPosts = Object.values(
   await import.meta.glob("./posts/*.md", { eager: true }),
 );
 ---
 
-<Layout>
+<Layout currentRoute={Astro.url.pathname}>
   <PageTitle
     title="Posts"
     description="My thoughts about something that interest me."
