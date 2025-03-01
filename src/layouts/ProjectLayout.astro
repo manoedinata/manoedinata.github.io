@@ -18,7 +18,23 @@ const { frontmatter } = Astro.props;
     <div class="container" data-aos="fade-up" data-aos-delay="100">
       <div class="row gy-4">
         <div class="col-lg-8">
-          <div class="portfolio-details-slider">
+          <div class="portfolio-details-slider swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+              {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                  "delay": 5000
+                },
+                "slidesPerView": "auto",
+                "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
+                }
+              }
+            </script>
+
             <div class="swiper-wrapper align-items-center">
               {
                 frontmatter.images.map((image: any) => (
