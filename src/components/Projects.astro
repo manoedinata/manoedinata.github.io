@@ -33,7 +33,9 @@ const { projects } = Astro.props;
                   alt=""
                 />
                 <div class="portfolio-info">
-                  <h4>{project.frontmatter.title}</h4>
+                  <h4>
+                    {`${project.frontmatter.title} | ${project.frontmatter.role}`}
+                  </h4>
                   <p>{project.frontmatter.description}</p>
                   <a
                     href={project.frontmatter.images[0]}
