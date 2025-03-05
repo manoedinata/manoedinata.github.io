@@ -2,6 +2,8 @@
 import PageTitle from "../components/PageTitle.astro";
 import Layout from "../layouts/Layout.astro";
 
+import { getFormattedDate } from "../utils/date";
+
 const allPosts = Object.values(
   await import.meta.glob("./posts/*.md", { eager: true }),
 );
@@ -38,15 +40,8 @@ const allPosts = Object.values(
                       </a>
                     </h4>
                     <small>
-                      <i class="bi bi-clock" />{" "}
-                      {new Date(post.frontmatter.date).toLocaleDateString(
-                        "en-US",
-                        {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        },
-                      )}
+                      <i class="bi bi-clock" />
+                      {getFormattedDate(post.frontmatter.date)}
                     </small>
                   </div>
                   <div class="card-footer">

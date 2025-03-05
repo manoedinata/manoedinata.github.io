@@ -1,5 +1,5 @@
 ---
-const { title, description, image, center } = Astro.props;
+const { title, date, description, image, center } = Astro.props;
 ---
 
 <!-- Page Title -->
@@ -18,9 +18,15 @@ const { title, description, image, center } = Astro.props;
       >
         <div class="col-lg-8">
           <h1>{title}</h1>
-          <p class="mb-0">
-            {description}
-          </p>
+          {
+            date && (
+              <p>
+                <i class="bi bi-clock" />
+                {date}
+              </p>
+            )
+          }
+          {description && <p class="mb-0">{description}</p>}
         </div>
       </div>
     </div>

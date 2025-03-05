@@ -1,13 +1,16 @@
 ---
 import PageTitle from "../components/PageTitle.astro";
 import Layout from "./Layout.astro";
+
+import { getFormattedDate } from "../utils/date";
+
 const { frontmatter } = Astro.props;
 ---
 
 <Layout>
   <PageTitle
     title={frontmatter.title}
-    description={frontmatter.description}
+    date={getFormattedDate(frontmatter.date)}
     image={frontmatter.image}
   />
 
