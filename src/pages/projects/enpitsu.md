@@ -5,6 +5,9 @@ slug: enpitsu
 description: Web/mobile-based assesment software.
 images:
   - /assets/img/uploads/enpitsu.jpg
+  - /assets/img/uploads/enpitsu-1.png
+  - /assets/img/uploads/enpitsu-2.png
+  - /assets/img/uploads/enpitsu-3.png
 role: DevOps Engineer
 project_url: https://github.com/reacto11mecha/enpitsu
 ---
