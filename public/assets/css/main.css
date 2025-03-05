@@ -1616,3 +1616,10 @@ h6 {
 .portfolio .portfolio-content {
   border-radius: 20px;
 }
+
+/* Posts content */
+#posts .content {
+  p {
+    font-size: 1.25rem !important;
+  }
+}
