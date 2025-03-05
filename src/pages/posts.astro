@@ -6,6 +6,9 @@ import { getFormattedDate } from "../utils/date";
 
 const allPosts = Object.values(
   await import.meta.glob("./posts/*.md", { eager: true }),
+).sort(
+  (a: any, b: any) =>
+    Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date),
 );
 ---
 
