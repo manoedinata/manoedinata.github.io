@@ -9,10 +9,20 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@srexi/purecounterjs": "^1.5.0",
+    "aos": "^2.3.4",
     "astro": "^5.3.0",
-    "decap-cms-app": "^3.6.2"
+    "decap-cms-app": "^3.6.2",
+    "glightbox": "^3.3.1",
+    "imagesloaded": "^5.0.0",
+    "isotope-layout": "^3.0.6",
+    "swiper": "^11.2.5",
+    "typed.js": "^2.1.0"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
+    "@types/imagesloaded": "^4.1.6",
+    "@types/isotope-layout": "^3.0.14",
     "prettier": "^3.5.2",
     "prettier-plugin-astro": "^0.14.1"
   }
