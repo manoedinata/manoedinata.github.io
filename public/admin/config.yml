@@ -44,6 +44,10 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string", required: false }
       - { label: "Description", name: "description", widget: "string" }
+      - label: "Backgrounds"
+        name: "backgrounds"
+        widget: "list"
+        field: { label: "Background", name: "background", widget: "markdown" }
       - label: "Images"
         name: "images"
         widget: "list"

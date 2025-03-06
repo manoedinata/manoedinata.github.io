@@ -67,6 +67,13 @@ const { frontmatter } = Astro.props;
             data-aos="fade-up"
             data-aos-delay="300"
           >
+            <h2>Background</h2>
+            {
+              frontmatter.backgrounds.map((background: string) => (
+                <p>{background}</p>
+              ))
+            }
+
             <slot />
           </div>
         </div>
