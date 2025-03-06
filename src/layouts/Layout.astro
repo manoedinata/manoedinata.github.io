@@ -37,12 +37,6 @@ const navItems = [
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/aos/aos.css" rel="stylesheet" />
-    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
-    <link
-      href="/assets/vendor/glightbox/css/glightbox.min.css"
-      rel="stylesheet"
-    />
 
     <!-- Main CSS File -->
     <link href="/assets/css/main.css" rel="stylesheet" />
@@ -125,20 +119,263 @@ const navItems = [
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer
     ></script>
     <script src="/assets/vendor/php-email-form/validate.js" defer></script>
-    <script src="/assets/vendor/aos/aos.js" defer></script>
-    <script src="/assets/vendor/typed.js/typed.umd.js" defer></script>
-    <script src="/assets/vendor/purecounter/purecounter_vanilla.js" defer
-    ></script>
-    <script src="/assets/vendor/waypoints/noframework.waypoints.js" defer
-    ></script>
-    <script src="/assets/vendor/swiper/swiper-bundle.min.js" defer></script>
-    <script src="/assets/vendor/glightbox/js/glightbox.min.js" defer></script>
-    <script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js" defer
-    ></script>
-    <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js" defer
-    ></script>
-
-    <!-- Main JS File -->
-    <script src="/assets/js/main.js" defer></script>
-  </body>
+    ></body
+  >
+  >
 </html>
+
+<script>
+  // AOS
+  import AOS from "aos";
+  import "aos/dist/aos.css";
+
+  // PureCounter
+  // @ts-ignore
+  import PureCounter from "@srexi/purecounterjs";
+
+  // Swiper
+  import Swiper from "swiper";
+  import "swiper/css";
+
+  // GLightbox
+  import GLightbox from "glightbox";
+
+  // Typed.js
+  import Typed from "typed.js";
+
+  // Waypoint
+  import "/public/assets/vendor/waypoints/noframework.waypoints.js";
+
+  // ImagesLoaded
+  import imagesLoaded from "imagesloaded";
+
+  // Isoptope
+  import Isotope from "isotope-layout";
+
+  // Ensure JS is only loaded after DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    "use strict";
+
+    /**
+     * Apply .scrolled class to the body as the page is scrolled down
+     */
+    function toggleScrolled() {
+      const selectBody = document.querySelector("body");
+      const selectHeader = document.querySelector("#header");
+      if (
+        !selectHeader?.classList.contains("scroll-up-sticky") &&
+        !selectHeader?.classList.contains("sticky-top") &&
+        !selectHeader?.classList.contains("fixed-top")
+      )
+        return;
+      window.scrollY > 100
+        ? selectBody?.classList.add("scrolled")
+        : selectBody?.classList.remove("scrolled");
+    }
+    document.addEventListener("scroll", toggleScrolled);
+    window.addEventListener("load", toggleScrolled);
+
+    /**
+     * Mobile nav toggle
+     */
+    const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
+
+    function mobileNavToogle() {
+      document.querySelector("body")?.classList.toggle("mobile-nav-active");
+      mobileNavToggleBtn?.classList.toggle("bi-list");
+      mobileNavToggleBtn?.classList.toggle("bi-x");
+    }
+    if (mobileNavToggleBtn) {
+      mobileNavToggleBtn.addEventListener("click", mobileNavToogle);
+    }
+
+    /**
+     * Hide mobile nav on same-page/hash links
+     */
+    document.querySelectorAll("#navmenu a").forEach((navmenu) => {
+      navmenu.addEventListener("click", () => {
+        if (document.querySelector(".mobile-nav-active")) {
+          mobileNavToogle();
+        }
+      });
+    });
+
+    /**
+     * Toggle mobile nav dropdowns
+     */
+    document
+      .querySelectorAll(".navmenu .toggle-dropdown")
+      .forEach((navmenu) => {
+        navmenu.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = e.currentTarget as HTMLElement;
+          const parentNode = target.parentNode as HTMLElement;
+          parentNode?.classList.toggle("active");
+          parentNode?.nextElementSibling?.classList.toggle("dropdown-active");
+          e.stopImmediatePropagation();
+        });
+      });
+
+    /**
+     * Preloader
+     */
+    const preloader = document.querySelector("#preloader");
+    if (preloader) {
+      window.addEventListener("load", () => {
+        preloader.remove();
+      });
+    }
+
+    /**
+     * Scroll top button
+     */
+    let scrollTop = document.querySelector(".scroll-top");
+
+    function toggleScrollTop() {
+      if (scrollTop) {
+        window.scrollY > 100
+          ? scrollTop.classList.add("active")
+          : scrollTop.classList.remove("active");
+      }
+    }
+    scrollTop?.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+    window.addEventListener("load", toggleScrollTop);
+    document.addEventListener("scroll", toggleScrollTop);
+
+    /**
+     * Animation on scroll function and init
+     */
+    function aosInit() {
+      AOS.init({
+        duration: 600,
+        easing: "ease-in-out",
+        once: true,
+        mirror: false,
+      });
+    }
+
+    /**
+     * Init typed.js
+     */
+    const selectTyped = document.querySelector(".typed");
+    if (selectTyped) {
+      let typed_strings = selectTyped.getAttribute("data-typed-items");
+      new Typed(".typed", {
+        strings: typed_strings?.split(","),
+        loop: false,
+        typeSpeed: 85,
+        backSpeed: 50,
+        backDelay: 2000,
+      });
+    }
+
+    /**
+     * Animate the skills items on reveal
+     */
+    let skillsAnimation = document.querySelectorAll(".skills-animation");
+    skillsAnimation.forEach((item) => {
+      // @ts-ignore
+      new Waypoint({
+        element: item,
+        offset: "80%",
+        handler: function (direction: any) {
+          let progress = item.querySelectorAll(".progress .progress-bar");
+          progress.forEach((element) => {
+            const el = element as HTMLElement;
+            el.style.width = el.getAttribute("aria-valuenow") + "%";
+          });
+        },
+      });
+    });
+
+    /**
+     * Init swiper sliders
+     */
+    function initSwiper() {
+      document.querySelectorAll(".init-swiper").forEach((swiperElement) => {
+        const el = swiperElement as HTMLElement;
+
+        let swiperConfig = el.querySelector(".swiper-config") as HTMLElement;
+        let config = swiperConfig
+          ? JSON.parse(swiperConfig.innerHTML.trim())
+          : {};
+
+        new Swiper(el, config);
+      });
+    }
+
+    /**
+     * Initiate glightbox
+     */
+    const glightbox = GLightbox({
+      selector: ".glightbox",
+    });
+
+    window.addEventListener("load", () => {
+      aosInit();
+
+      new PureCounter();
+
+      initSwiper();
+
+      GLightbox({ selector: ".glightbox" });
+    });
+
+    /**
+     * Init isotope layout and filters
+     */
+    document.querySelectorAll(".isotope-layout").forEach(function (item) {
+      const isotopeItem = item as HTMLElement;
+
+      let layout = (isotopeItem.getAttribute("data-layout") ??
+        "masonry") as Isotope.IsotopeOptions["layoutMode"];
+      let filter = isotopeItem.getAttribute("data-default-filter") ?? "*";
+      let sort = isotopeItem.getAttribute("data-sort") ?? "original-order";
+
+      let initIsotope: Isotope;
+      const isotopeContainer = isotopeItem.querySelector(
+        ".isotope-container",
+      ) as HTMLElement;
+
+      imagesLoaded(isotopeContainer, function () {
+        initIsotope = new Isotope(isotopeContainer, {
+          itemSelector: ".isotope-item",
+          layoutMode: layout,
+          filter: filter,
+          sortBy: sort,
+        });
+      });
+
+      isotopeItem
+        .querySelectorAll(".isotope-filters li")
+        .forEach(function (filters) {
+          filters.addEventListener(
+            "click",
+            function (e) {
+              const target = e.currentTarget as HTMLElement;
+
+              isotopeItem
+                .querySelector(".isotope-filters .filter-active")
+                ?.classList.remove("filter-active");
+
+              target.classList.add("filter-active");
+
+              initIsotope.arrange({
+                filter: target.getAttribute("data-filter") ?? "*",
+              });
+              if (typeof aosInit === "function") {
+                aosInit();
+              }
+            },
+            false,
+          );
+        });
+    });
+  });
+</script>
