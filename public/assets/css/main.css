@@ -1617,10 +1617,10 @@ h6 {
   border-radius: 20px;
 }
 
-/* Posts content */
-#posts .content {
+/* Posts/projects content */
+.article-content {
   p {
-    font-size: 1.25rem !important;
+    font-size: 1.2rem !important;
     text-align: justify;
   }
 }

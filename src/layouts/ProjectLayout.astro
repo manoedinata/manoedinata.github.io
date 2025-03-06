@@ -75,7 +75,9 @@ const { frontmatter } = Astro.props;
             }
           </div>
         </div>
-        <slot />
+        <div class="article-content">
+          <slot />
+        </div>
       </div>
     </div>
   </section><!-- /Portfolio Details Section -->
