@@ -132,7 +132,9 @@ const navItems = [
 
   // Swiper
   import Swiper from "swiper";
+  import { Pagination } from "swiper/modules";
   import "swiper/css";
+  import "swiper/css/pagination";
 
   // GLightbox
   import GLightbox from "glightbox";
@@ -303,7 +305,10 @@ const navItems = [
           ? JSON.parse(swiperConfig.innerHTML.trim())
           : {};
 
-        new Swiper(el, config);
+        new Swiper(el, {
+          ...config,
+          modules: [Pagination],
+        });
       });
     }
 
