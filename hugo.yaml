@@ -1,0 +1,30 @@
+theme: ["PaperMod"]
+baseURL: https://manoedinata.com/
+languageCode: en-us
+title: manoedinata
+enableEmoji: true
+
+params:
+  profileMode:
+    enabled: true
+    title: "Hendra Manudinata" # optional default will be site title
+    subtitle: "Just an ordinary 'hooman'"
+    imageUrl: "https://avatars.githubusercontent.com/u/116422610" # optional
+    imageTitle: "Hendra Manudinata" # optional
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+    buttons:
+      - name: About
+        url: "/about/"
+      - name: Journal
+        url: "https://journal.manoedinata.com/"
+
+  socialIcons: # optional
+    - name: "github"
+      url: "https://github.com/manoedinata"
+    - name: "instagram"
+      url: "https://www.instagram.com/manoedinata/"
+    - name: "linkedin"
+      url: "https://www.linkedin.com/in/manoedinata/"
+    - name: "email"
+      url: "mailto:hendra@manoedinata.com"
