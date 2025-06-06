@@ -4,6 +4,10 @@ languageCode: en-us
 title: manoedinata
 enableEmoji: true
 
+caches:
+  images:
+    dir: :cacheDir/images
+
 params:
   profileMode:
     enabled: true
