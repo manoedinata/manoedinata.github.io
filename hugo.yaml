@@ -20,6 +20,10 @@ params:
     buttons:
       - name: About
         url: "/about/"
+      - name: Projects
+        url: "/projects/"
+      - name: Achievements
+        url: "/achievements/"
       - name: Journal
         url: "https://journal.manoedinata.com/"
 
