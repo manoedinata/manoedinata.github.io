@@ -1,5 +1,5 @@
 ---
-title: Runner-up — OlimpIT ARA 6.0
+title: 🏆 Runner-up — OlimpIT ARA 6.0
 date: 2025-01-22
 summary: |
   Second place of **Information Technology Olympiad (OlimpIT)**
