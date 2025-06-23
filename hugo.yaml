@@ -26,6 +26,8 @@ params:
         url: "/achievements/"
       - name: Journal
         url: "https://journal.manoedinata.com/"
+      - name: Services Monitoring
+        url: "https://mdinata.my.id/"
 
   socialIcons: # optional
     - name: "github"
