@@ -24,8 +24,8 @@ params:
         url: "/projects/"
       - name: Achievements
         url: "/achievements/"
-      - name: Journal
-        url: "https://journal.manoedinata.com/"
+      - name: Blog
+        url: "/blog"
       - name: CTF Writeups
         url: "https://github.com/manoedinata/ctf-writeup"
       - name: DaunScape
