@@ -15,7 +15,7 @@ I can be reached in the following places:
 
 - LinkedIn: <https://www.linkedin.com/in/manoedinata>
 - Telegram: [@manoedinata](https://t.me/manoedinata)
-- Mail: [hendra@manoedinata.com](mailto:hendra@manoedinata.com)
+- Mail: [hendra@mdinata.my.id](mailto:hendra@mdinata.my.id)
 - Matrix: @manoedinata:matrix.org
 
 Fun facts:
