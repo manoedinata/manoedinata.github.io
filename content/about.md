@@ -21,5 +21,6 @@ I can be reached in the following places:
 Fun facts:
 
 - I’m also known as **@manoedinata** on the Internet. _manoedinata_ is actually my last name, but intentionally converted _from_ Indonesian’s EYD (_Ejaan Yang Disempurnakan_, which translates to _Enhanced Spelling System_). Don’t call me IRL with that username!
+- I'm starting to dive deeper in _cyber security_, such as CTF competitions. In most cases, I'm known as **@ndrasukagacoan** or **@ndrasukadimsum**.
 - Sometimes coffee makes me sleepy even more
 - Hmm...
