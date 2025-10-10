@@ -27,7 +27,7 @@ params:
       - name: Blog
         url: "/blog"
       - name: CTF Writeups
-        url: "https://github.com/manoedinata/ctf-writeup"
+        url: "/ctf-writeups"
       - name: DaunScape
         url: "https://daunscape.tech/"
 
