@@ -13,7 +13,7 @@ params:
     enabled: true
     title: "Hendra Manudinata" # optional default will be site title
     subtitle: "Just an ordinary 'hooman'"
-    imageUrl: "https://avatars.githubusercontent.com/u/116422610" # optional
+    imageUrl: "img/profile_pic.jpg" # optional
     imageTitle: "Hendra Manudinata" # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
