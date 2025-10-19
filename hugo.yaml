@@ -24,10 +24,10 @@ params:
         url: "/projects/"
       - name: Achievements
         url: "/achievements/"
-      - name: Blog
-        url: "/blog"
       - name: CTF Writeups
         url: "/ctf-writeups"
+      - name: Blog
+        url: "https://mdinata.my.id/blog"
       - name: DaunScape
         url: "https://daunscape.tech/"
 
