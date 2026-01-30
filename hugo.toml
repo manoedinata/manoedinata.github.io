@@ -1,3 +1,77 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://mdinata.my.id/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Hendra Manudinata'
+theme = 'typo'
+
+# Google analytics code
+googleAnalytics = "G-xxxxxxxxx"
+
+[taxonomies]
+tag = 'tags'
+
+[params]
+# Meta description
+description = "A Tech Blog"
+
+# Appearance settings
+theme = 'auto'
+colorPalette = 'default'
+hideHeader = false
+
+# Intro on main page, content is markdown
+homeIntroTitle = 'Hi there! 👋'
+homeIntroContent = """
+I'm **Hendra Manudinata**, usually called **Hendra**. I'm a student from Indonesia with interests in web development, embedded devices, as well as cyber security. I'm currently pursuing a bachelor's degree in [Information Technology](https://www.its.ac.id/it) at [Institut Teknologi Sepuluh Nopember](https://www.its.ac.id).
+
+I tinker with Android, Linux, and a little bit of IoT & microcontrollers, but now I mostly work on web applications. This GitHub page is where I store (almost) all of my works. Most of my projects are made FOSS and can be found in my [repositories](https://github.com/manoedinata?tab=repositories).
+
+I'm also interested in robotics. I'm currently taking part as a programmer in [IRIS ITS](https://iris.its.ac.id), a research & development team for wheeled robot soccer competitions, such as [FIRA RoboWorld Cup](https://firaworldcup.org), [RoboCup](https://www.robocup.org), and Indonesia's [Kontes Robot Indonesia](https://kontesrobotindonesia.id).
+"""
+
+# Collection to display on home
+homeCollectionTitle = 'Blog'
+homeCollection = 'blog'
+
+# Lists parameters
+paginationSize = 100
+listSummaries = true
+listDateFormat = '2 Jan 2006'
+
+# Breadcrumbs
+[params.breadcrumbs]
+enabled = true
+showCurrentPage = true
+home = "Home"
+
+# Social icons
+[[params.social]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/manoedinata/"
+
+[[params.social]]
+name = "github"
+url = "https://github.com/manoedinata"
+
+# Main menu pages
+[[params.menu]]
+name = "home"
+url = "/"
+
+[[params.menu]]
+name = "blog"
+url = "/blog"
+
+# Syntax highlight on code blocks
+[markup]
+[markup.highlight]
+noClasses = false
+
+# Giscus comments
+[params.giscus]
+enable = false
+repo = "user/repo"
+repoid = "repoId"
+category = "General"
+categoryid = "categoryId"
+mapping = "pathname"
+theme = "preferred_color_scheme"
