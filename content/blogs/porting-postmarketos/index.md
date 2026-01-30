@@ -41,7 +41,7 @@ Also, there's an existing port for Samsung Galaxy Xcover4 (2017, codenamed `xcov
 
 ### Samsung Galaxy A51
 
-What about A51? Its SoC (Exynos 9611) should be similar to Samsung Galaxy S9 (Exynos 9810), but it uses dynamic partitions, so I need some time to understand the ideal partition layout for pmOS. I could use a hand as well. Probably use someone's device configuration for it.
+I wrote a post about porting postmarketOS onto Samsung Galaxy A51 [here]({{< ref "postmarketos-on-samsung-galaxy-a51" >}}). Check it out!
 
 <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="samsunga51/106183" data-width="100%"></script>
 
