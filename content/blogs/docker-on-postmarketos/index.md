@@ -5,7 +5,7 @@ date: "2024-11-28"
 tags: ["linux"]
 ---
 
-After successfully [running postmarketOS on my old Samsung Galaxy J4]({% post_url 2024-11-16-porting-postmarketos %}), it's time to take it even further: **Running Docker to self-host local applications**.
+After successfully [running postmarketOS on my old Samsung Galaxy J4]({{< ref "porting-postmarketos" >}}), it's time to take it even further: **Running Docker to self-host local applications**.
 
 Since postmarketOS runs Alpine Linux natively, there's no need to run VMs, chroot, or whatever it is. Just native. Ain't that cool?
 
