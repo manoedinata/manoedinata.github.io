@@ -27,11 +27,11 @@ Ah yes, now comes the worst part. What could go wrong with postmarketOS on A51, 
 
 Well, some things do.
 
-### 1. USB Networking
+### USB Networking
 
 No matter what I've tried trying to bringup RNDIS interface, it's just refusing to work. Thus, I can't connect to the device through USB cable. I did make sure every required kernel configurations are enabled (ConfigFS Ether & RNDIS to sum up), using [initfs-hook](https://gitlab.postmarketos.org/postmarketOS/pmaports/-/blob/4d327313e40b48bdb9ac0c6e07f0b36cc2be4ff8/device/testing/device-samsung-dream/initfs-hook.sh) (like [samsung-dreamlte](<https://wiki.postmarketos.org/wiki/Samsung_Galaxy_S8_(samsung-dreamlte)>) did), and even enabling ConfigFS manually in [Debug Shell](https://wiki.postmarketos.org/wiki/Initramfs/Inspecting#Using_the_debug_shell), but no luck.
 
-### 2. Wi-Fi
+### Wi-Fi
 
 Although the required proprietary blobs are loaded and Wi-Fi did turn on, it can't connect to any available network. This assumption is based on attempt to connect to an AP through NetworkManager (on XFCE 4).
 
