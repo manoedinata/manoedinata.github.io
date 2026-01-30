@@ -37,7 +37,7 @@ The first device I ported onto is Samsung Galaxy J4. It has Exynos 7570 SoC, bru
 
 Also, there's an existing port for Samsung Galaxy Xcover4 (2017, codenamed `xcover4lte`), which uses Exynos 7570. I could just copy over the `xcover4lte` device & kernel configurations, rename it to `j4lte`, adjust some values, and _voila_! Things couldn't have been more easier :D
 
-<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="SamsungGalaxyJ4/55715" data-width="100%"></script>
+{{< telegram "SamsungGalaxyJ4/55715" >}}
 
 ### Samsung Galaxy A51
 
