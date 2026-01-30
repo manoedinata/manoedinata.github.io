@@ -71,6 +71,10 @@ url = "/"
 name = "blogs"
 url = "/blogs"
 
+[[params.menu]]
+name = "cv"
+url = "https://hendra.mdinata.my.id"
+
 # Syntax highlight on code blocks
 [markup]
 [markup.highlight]
