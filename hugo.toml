@@ -75,3 +75,13 @@ category = "General"
 categoryid = "categoryId"
 mapping = "pathname"
 theme = "preferred_color_scheme"
+
+[[cascade]]
+  [cascade.params]
+    toc = false
+    readTime = true
+    autonumber = true
+    math = false
+
+  [cascade._target]
+    path = "/blogs/**"
