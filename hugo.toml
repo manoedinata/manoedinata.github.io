@@ -29,8 +29,8 @@ I'm also interested in robotics. I'm currently taking part as a programmer in [I
 """
 
 # Collection to display on home
-homeCollectionTitle = 'Blog'
-homeCollection = 'blog'
+homeCollectionTitle = 'Blogs'
+homeCollection = 'blogs'
 
 # Lists parameters
 paginationSize = 100
@@ -58,8 +58,8 @@ name = "home"
 url = "/"
 
 [[params.menu]]
-name = "blog"
-url = "/blog"
+name = "blogs"
+url = "/blogs"
 
 # Syntax highlight on code blocks
 [markup]
