@@ -41,7 +41,7 @@ jobs:
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        run: notion2hugo
+        run: notion2hugo --output ./content/blogs
 
       - name: Deploy to Posts Branch
         uses: peaceiris/actions-gh-pages@v3
