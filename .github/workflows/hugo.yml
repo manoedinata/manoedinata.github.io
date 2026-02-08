@@ -48,7 +48,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: posts
-          path: content/blogs
+          path: content
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
