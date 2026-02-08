@@ -49,7 +49,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./content
           publish_branch: posts
-          keep_files: true # to avoid deleting other content
+          keep_files: false
           user_name: "github-actions[bot]"
           user_email: "github-actions[bot]@users.noreply.github.com"
           commit_message: "feat: sync content from notion"
