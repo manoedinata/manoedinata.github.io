@@ -5,7 +5,12 @@ on:
   # Runs on pushes targeting the default branch
   # Runs when posts are pushed to 'posts' branch
   push:
-    branches: [master, posts]
+    branches: [master]
+
+  workflow_run:
+    workflows: ["Sync Notion Content"] # MUST match the 'name' in notion2hugo.yml exactly
+    types:
+      - completed
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -30,6 +35,7 @@ defaults:
 jobs:
   # Build job
   build:
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name != 'workflow_run' }}
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.155.0
