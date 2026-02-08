@@ -46,6 +46,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+      - name: Checkout Posts
+        uses: actions/checkout@v4
+        with:
+          ref: posts
+          path: content/blogs
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
