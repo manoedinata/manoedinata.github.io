@@ -9,7 +9,7 @@ title: 'Computer Vision: Road Lane Detection with OpenCV'
 
 ![](301d7b6d-e5f1-80aa-932a-f3cfde6205a6.png)
 
-During my internship in IRIS ITS (a robotics team focusing on wheeled, autonomous system) I was tasked to make a road detection & turn degree estimation based on camera frames. By using OpenCV and some image processing method, this can be achieved with moderate accuracy.
+During my internship in [IRIS ITS](https://iris.its.ac.id/) (a robotics team focusing on wheeled, autonomous system), I was tasked to make a road detection & turn degree estimation system based on camera frames. By using OpenCV and some image processing method, this can be achieved with moderate accuracy.
 
 # Source Code
 
@@ -42,15 +42,13 @@ if(frame.cols != 640 || frame.rows != 360)
 Blur the image to reduce noise:
 
 ```c++
-// Blur image untuk mengurangi noise
 cv::Mat frame_blurred;
 cv::GaussianBlur(frame, frame_blurred, cv::Size(5, 5), 0);
 ```
 
-Apply HSV as well:
+Convert to Hue-Saturation-Value (HSV) as well:
 
 ```c++
-// Convert ke HSV color space
 cv::Mat hsv;
 cv::cvtColor(frame_blurred, hsv, cv::COLOR_BGR2HSV);
 ```
@@ -83,11 +81,13 @@ cv::Mat road_lane;
 cv::bitwise_and(inverted_mask, edges, road_lane);
 ```
 
-# Bird’s Eye-View, Changing the POV
+# Changing the POV with Bird’s Eye-View
 
 To make the detection, we could change the image perspective, as if we’re looking the field from the sky (or drone, or GPS… you know what I mean).
 
-For this, we could implement what’s usually called a **Bird’s Eye-View (BEV)**. Simply put, BEV distorts the 
+![Bird’s Eye-View. Source: [https://www.mathworks.com/help/visionhdl/ref/birdseyeview.html](https://www.mathworks.com/help/visionhdl/ref/birdseyeview.html)](301d7b6d-e5f1-800c-b662-d2742d24cbf2.png)
+
+For this, we could implement what’s usually called a **Bird’s Eye-View (BEV)**. Simply put, BEV distorts the image from specified coordinates (**points**). These points are needed to be set manually and accurately, so that the BEV transformation will be accurate as expected.
 
 ```c++
 // BIRD'S EYE VIEW (BEV)
@@ -95,22 +95,25 @@ cv::Point2f top_left(static_cast<float>(width * 0.2), 140.0f);
 cv::Point2f top_right(static_cast<float>(width * 0.8), 140.0f);
 cv::Point2f bottom_left(0.0f, static_cast<float>(height));
 cv::Point2f bottom_right(static_cast<float>(width), static_cast<float>(height));
-    cv::Point2f src_view[4] = {top_left, top_right, bottom_right, bottom_left};
+cv::Point2f src_view[4] = {top_left, top_right, bottom_right, bottom_left};
 cv::Point2f dst_view[4] = {
-        cv::Point2f(0.0f, 0.0f),
-        cv::Point2f(static_cast<float>(width), 0.0f),
-        cv::Point2f(static_cast<float>(width), static_cast<float>(height)),
-        cv::Point2f(0.0f, static_cast<float>(height))
+		cv::Point2f(0.0f, 0.0f),
+	  cv::Point2f(static_cast<float>(width), 0.0f),
+	  cv::Point2f(static_cast<float>(width), static_cast<float>(height)),
+	  cv::Point2f(0.0f, static_cast<float>(height))
 };
 
 cv::Mat M_perspective = cv::getPerspectiveTransform(src_view, dst_view);
 
-// Buat BEV Canny (untuk deteksi & odometri)
+// BEV for Canny (for detection & odometry)
 cv::Mat bev_image;
 cv::warpPerspective(road_lane, bev_image, M_perspective, cv::Size(width, height));
 
-// Buat BEV Berwarna (untuk menggambar visualisasi)
+// BEV on colored image (for visualization)
 cv::Mat image_to_bev;
 cv::warpPerspective(frame, image_to_bev, M_perspective, cv::Size(width, height));
-
 ```
+
+# What’s Next?
+
+To be added!
