@@ -1,0 +1,55 @@
+name: Sync Notion Content
+
+on:
+  # Run every 30 minutes
+  schedule:
+    - cron: "*/30 * * * *"
+
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Repository
+        uses: actions/checkout@v4
+        with:
+          ref: posts
+          fetch-depth: 0
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          repository: manoedinata/notion2hugo
+          path: notion2hugo
+
+      # 2. Setup Python environment
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install Notion2Hugo
+        run: cd notion2hugo && pip install .
+
+      - name: Fetch Notion Posts
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: notion2hugo
+
+      - name: Deploy to Posts Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./content
+          publish_branch: posts
+          keep_files: false
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_message: "feat: sync content from notion"
