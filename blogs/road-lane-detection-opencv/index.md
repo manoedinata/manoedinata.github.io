@@ -15,7 +15,7 @@ During my internship in [IRIS ITS](https://iris.its.ac.id/) (a robotics team foc
 
 The project is based on [ROS](https://www.ros.org/) workspace.
 
-  - GitHub: [https://github.com/manoedinata/IRIS-FP1](https://github.com/manoedinata/IRIS-FP1)GitHub: [https://github.com/manoedinata/IRIS-FP1](https://github.com/manoedinata/IRIS-FP1)
+  - GitHub: [https://github.com/manoedinata/IRIS-FP1](https://github.com/manoedinata/IRIS-FP1)
   - Base Station (Web UI dashboard): [https://github.com/manoedinata/fp1_bs_iris25](https://github.com/manoedinata/fp1_bs_iris25)
 # Preparing OpenCV Frame
 
@@ -59,7 +59,7 @@ cv::cvtColor(frame_blurred, hsv, cv::COLOR_BGR2HSV);
 
 To get the road lane from a frame, the base logic is quite simple:
 
-  - Outside of the road arena is **a field**. In IRIS’ laboratory, this is a green-colored field. To get ONLY road arena, simply invert this
+  - Outside of the road arena is **a field**. In IRIS’ laboratory, this is a green-colored field. To get **ONLY road arena**, simply **invert** this
   - Road arena is **outlined**
   - **Combine** them, then voila!
 ```c++
