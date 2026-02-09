@@ -1,5 +1,5 @@
 ---
-date: '2024-11-08'
+date: '2024-11-16'
 draft: false
 summary: Docker on a phone? Hell yeah!
 tags:
@@ -7,6 +7,8 @@ tags:
 - android
 title: Running Docker on postmarketOS
 ---
+
+![](302d7b6d-e5f1-80ad-b635-cb170e63c0eb.png)
 
 After successfully [running postmarketOS on my old Samsung Galaxy J4](https://manoedinata.github.io/blogs/porting-postmarketos/), it’s time to take it even further: **Running Docker to self-host local applications**.
 
@@ -29,8 +31,10 @@ TBA.
 
 This should be straightforward.
 
-`sudo apk add docker docker-compose
-sudo addgroup $USER docker`
+```bash
+sudo apk add docker docker-compose
+sudo addgroup $USER docker
+```
 
 # Enabling cgroup Mounts
 
@@ -40,23 +44,30 @@ As a workaround, switch OpenRC cgroup mounts to hybrid mode, where both cgroups 
 
 Open `/etc/rc.conf`, search for `rc_group_mode`, then set it to either `hybrid` or `legacy`.
 
-`# This sets the mode used to mount cgroups.
+```bash
+# This sets the mode used to mount cgroups.
 # "hybrid" mounts cgroups version 2 on /sys/fs/cgroup/unified and
 # cgroups version 1 on /sys/fs/cgroup.
 # "legacy" mounts cgroups version 1 on /sys/fs/cgroup
 # "unified" mounts cgroups version 2 on /sys/fs/cgroup
-rc_cgroup_mode="hybrid"`
+rc_cgroup_mode="hybrid"
+```
+
+![](302d7b6d-e5f1-809e-888a-ce1e568db56f.png)
 
 # Switching to iptables-legacy
 
 Trying to manually run dockerd results in this error:
 
-`INFO[2024-11-10T11:34:25.208702609+07:00] unable to detect if iptables supports xlock: 'iptables --wait -L -n': `# Warning: iptables-legacy tables present, use iptables-legacy to see them
-iptables v1.8.10 (nf_tables): Could not fetch rule set generation id: Invalid argument`  error="exit status 4"`
+```bash
+INFO[2024-11-10T11:34:25.208702609+07:00] unable to detect if iptables supports xlock: 'iptables --wait -L -n': `# Warning: iptables-legacy tables present, use iptables-legacy to see them
+iptables v1.8.10 (nf_tables): Could not fetch rule set generation id: Invalid argument`  error="exit status 4"
+```
 
 Switching to iptables-legacy seems to fix this problem, whether permanently or temporary. To switch, link iptables-legacy to the original iptables binary.
 
-`sudo apk add iptables-legacy
+```bash
+sudo apk add iptables-legacy
 
 # Rename original iptables
 sudo mv /usr/sbin/iptables /usr/sbin/iptables-original
@@ -68,9 +79,16 @@ sudo mv /usr/sbin/ebtables /usr/sbin/ebtables-original
 sudo ln -s /usr/sbin/iptables-legacy /usr/sbin/iptables
 sudo ln -s /usr/sbin/ip6tables-legacy /usr/sbin/ip6tables
 sudo ln -s /usr/sbin/arptables-legacy /usr/sbin/arptables
-sudo ln -s /usr/sbin/ebtables-legacy /usr/sbin/ebtables`
+sudo ln -s /usr/sbin/ebtables-legacy /usr/sbin/ebtables
+```
 
 # Starting Docker
 
-`sudo service docker start
-sudo rc-update add docker default`
+```bash
+sudo service docker start
+sudo rc-update add docker default
+```
+
+# Testing
+
+![](302d7b6d-e5f1-8037-90cb-c2eed3ec6886.png)

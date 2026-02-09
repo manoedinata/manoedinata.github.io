@@ -1,5 +1,5 @@
 ---
-date: '2024-11-16'
+date: '2024-11-08'
 draft: false
 summary: Reducing e-waste. Why not using old phones as small home servers?
 tags:
@@ -23,6 +23,8 @@ Though I could just install Android ROMs, root them with [Magisk](https://githu
 So… what is the most suitable OS for this?
 
 # Say Hi to postmarketOS!
+
+![](302d7b6d-e5f1-80ef-9657-d5a64f5843ef.jpg)
 
 After some sort of research, I found **postmarketOS** project, and since then, things have changed.
 
