@@ -11,7 +11,7 @@ title: 'Porting PostmarketOS: Continuing to Samsung Galaxy A51'
 
 ![](302d7b6d-e5f1-809a-b004-cf2824aec464.jpg)
 
-
+WARNING: This post is outdated. Please see the [postmarketOS’ Wiki](https://wiki.postmarketos.org/wiki/Samsung_Galaxy_A51_(samsung-a51)) for latest information regading Samsung Galaxy A51 porting status: [https://wiki.postmarketos.org/wiki/Samsung_Galaxy_A51_(samsung-a51)](https://wiki.postmarketos.org/wiki/Samsung_Galaxy_A51_(samsung-a51))
 
 After successfully porting [postmarketOS (pmOS) on Samsung Galaxy J4](https://wiki.postmarketos.org/wiki/Samsung_Galaxy_J4_(samsung-j4lte)), I continued to my another unused device with higher specification, [Samsung Galaxy A51](https://wiki.postmarketos.org/wiki/Samsung_Galaxy_A51_(samsung-a51)).
 
