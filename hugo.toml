@@ -1,6 +1,6 @@
 baseURL = 'https://mdinata.my.id/'
 languageCode = 'en-us'
-title = 'Hendra Manudinata'
+title = './hendra'
 theme = 'typo'
 
 # Google analytics code
