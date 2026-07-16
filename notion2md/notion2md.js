@@ -13,9 +13,13 @@ if (!NOTION_TOKEN) {
 }
 // A page inside the "Posts" database (any page works) OR the database id.
 // The script resolves the parent database / data source automatically.
-const SEED_ID = process.env.NOTION_SEED_ID || "301d7b6de5f180ba98bfe42f2ceda70b";
-// This script now lives in <repo>/notion2md/, so output goes one level up.
-const OUTPUT_DIR = path.join(__dirname, "..", "content", "blogs");
+// NOTION_DATABASE_ID is also accepted for compatibility with existing CI secrets.
+const SEED_ID = process.env.NOTION_SEED_ID || process.env.NOTION_DATABASE_ID || "301d7b6de5f180ba98bfe42f2ceda70b";
+// This script lives in <repo>/notion2md/, so by default output goes one level up.
+// Override with OUTPUT_DIR (e.g. in CI) to write elsewhere.
+const OUTPUT_DIR = process.env.OUTPUT_DIR
+    ? path.resolve(process.env.OUTPUT_DIR)
+    : path.join(__dirname, "..", "content", "blogs");
 
 const notion = new Client({ auth: NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });

@@ -15,41 +15,38 @@ jobs:
   sync-and-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Repository
+      - name: Checkout Repository (main)
         uses: actions/checkout@v4
-        with:
-          ref: posts
-          fetch-depth: 0
 
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          repository: manoedinata/notion2hugo
-          path: notion2hugo
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: notion2md/package-lock.json
 
-      # 2. Setup Python environment
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-          cache: "pip"
-
-      - name: Install Notion2Hugo
-        run: cd notion2hugo && pip install .
+      - name: Install dependencies
+        run: cd notion2md && npm ci
 
       - name: Fetch Notion Posts
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        run: notion2hugo --output ./content/blogs
+          # Overwrite the site's blog content in place on the master branch.
+          OUTPUT_DIR: ${{ github.workspace }}/content/blogs
+        run: |
+          # Start from a clean slate so removed Notion posts disappear too.
+          rm -rf "$OUTPUT_DIR"
+          cd notion2md && node notion2md.js
 
-      - name: Deploy to Posts Branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./content
-          publish_branch: posts
-          keep_files: false
-          user_name: "github-actions[bot]"
-          user_email: "github-actions[bot]@users.noreply.github.com"
-          commit_message: "feat: sync content from notion"
+      - name: Commit synced content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/blogs
+          if git diff --cached --quiet; then
+            echo "No content changes to commit."
+          else
+            git commit -m "feat: sync content from notion"
+            git push
+          fi
