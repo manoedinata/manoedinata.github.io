@@ -34,5 +34,7 @@ const siteMeta = () => ({
 })
 
 export default defineConfig({
+  // Set by the Pages workflow: "/" for a custom domain, "/<repo>/" for a project site.
+  base: process.env.BASE_PATH || '/',
   plugins: [yaml(), siteMeta(), vue(), tailwindcss()],
 })
