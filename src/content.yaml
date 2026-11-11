@@ -1,0 +1,149 @@
+# Page content. Edit this file; the page updates on save.
+#
+# hue: purple | red | orange | yellow | green | blue | indigo | fuchsia | neutral | latte | slate
+#      (defined in src/data.js → HUES)
+# icon (contacts only): x | github | mail | pen | paper-plane | telegram   (defined in src/components/Icon.vue)
+# href: full URL opens in a new tab; "#say-hi" smooth-scrolls to the contact tiles.
+
+# Browser tab title and search/share description (written into index.html at build).
+# Leave title empty to use profile.name.
+site:
+  title: ~Hendra
+  description: Hi! I do some interesting things.
+
+profile:
+  name: Hendra M. # used for the footer and as the fallback tab title
+  # Intro heading cycles through these with a fast swipe-up. One entry = no animation.
+  # Leave out to just show `name`.
+  names:
+    - Hendra.
+    - Hennn
+    - Ndra
+  name_interval: 2500 # ms each name stays on screen
+  lines:
+    - Hi! I do some interesting things.
+    - I like taking systems apart and putting them back together, better.
+
+# "What I do": big tinted cards
+features:
+  - emoji: 🔮
+    title: Android Tinkering
+    # role: Maintainer
+    # description: I maintain a collection of Android devices that can run mainline Linux kernels.
+    description: I tinker with Android devices to port more custom ROMs, and also attempting to run mainline Linux kernels on them.
+    href: "https://github.com/DaunScape"
+    hue: purple
+
+  - emoji: 🏫
+    title: Sepuluh Nopember Institute of Technology
+    description: Information Technology (2025 - 2029)
+    href: "https://its.ac.id"
+    hue: red
+
+  - emoji: ☕
+    title: Something new
+    description: Let's chit-chat!
+    href: "#say-hi"
+    hue: latte
+    id: something-new
+
+# "Say hi!": square tiles. handle is shown only when printing.
+contacts:
+  # - label: X
+  #   handle: "@ndraa"
+  #   icon: x
+  #   href: "https://x.com/"
+  #   hue: neutral
+
+  - label: GitHub
+    handle: "@manoedinata"
+    icon: github
+    href: "https://github.com/manoedinata"
+    hue: slate
+
+  - label: Email
+    handle: hm@ndraa.xyz
+    icon: mail
+    href: "mailto:hm@ndraa.xyz"
+    hue: orange
+
+  - label: Telegram
+    handle: "@manoedinata"
+    icon: paper-plane
+    href: "https://t.me/manoedinata"
+    hue: indigo
+
+  - label: Blog
+    icon: pen
+    href: "https://ndraa.xyz/writings"
+    hue: blue
+
+# "Other doings": one card per category
+projects:
+  - emoji: 💼
+    title: Work
+    hue: orange
+    items:
+      - title: Research · IRIS ITS
+        year: 2025
+        description: Developing autonomous robots based on computer vision and motion planning.
+        href: "https://iris.its.ac.id"
+      - title: Developer · DaunScape
+        year: 2024
+        description: Initiated mainline attempt and porting custom ROMs for Android devices.
+        href: "https://github.com/DaunScape"
+
+  # - emoji: 🌈
+  #   title: Design tools
+  #   hue: yellow
+  #   items:
+  #     - title: Palette Kit
+  #       year: 2024
+  #       description: Perceptual colour palettes for terminals and editors.
+  #       href: "#"
+  #     - title: Theme Engine
+  #       year: 2023
+  #       description: Dynamic theming from a single seed colour.
+  #       href: "#"
+
+  # - emoji: 🛠️
+  #   title: Tools
+  #   hue: indigo
+  #   items:
+  #     - title: benchkit
+  #       year: 2023
+  #       description: Measure CPU efficiency and power curves.
+  #       href: "#"
+  #     - title: dotfiles
+  #       year: 2022
+  #       description: Reproducible dev environment in one command.
+  #       href: "#"
+
+  - emoji: 🤖
+    title: Hacking
+    hue: green
+    items:
+      - title: Mainline Linux on Android
+        year: 2026
+        description: Porting mainline Linux kernels to Android devices. Because... why not?
+        href: "#"
+      - title: LineageOS Porting
+        year: 2025
+        description: Showing love to my old Android devices that have no custom ROM support.
+        href: "#"
+
+  - emoji: 👻
+    title: Misfits
+    hue: fuchsia
+    items:
+      - title: Scheduled Class Slot Checker
+        year: 2026
+        description: Because I don't like refreshing the Academic portal page every 5 minutes for a day.
+        href: "https://github.com/manoedinata/mia_detect"
+
+footer:
+  links:
+    - label: Terms
+      href: "#"
+    - label: Privacy
+      href: "#"

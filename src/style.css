@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "TASA Orbiter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+html {
+  --link-border-color-light: #000;
+  --link-border-color-dark: #fff;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in shared by the maze-chase canvas and its "what's this?" link */
+.animate-gol {
+  opacity: 0;
+  animation: gol-fade-in 1.2s ease-in-out forwards;
+  animation-delay: 0.25s;
+}
+@keyframes gol-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
