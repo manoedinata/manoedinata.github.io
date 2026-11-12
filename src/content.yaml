@@ -2,7 +2,8 @@
 #
 # hue: purple | red | orange | yellow | green | blue | indigo | fuchsia | neutral | latte | slate
 #      (defined in src/data.js → HUES)
-# icon (contacts only): x | github | mail | pen | paper-plane | telegram   (defined in src/components/Icon.vue)
+# icon (features, projects): any file name in src/assets/emoji/ (colour Fluent Emoji; see src/emoji.js to add more)
+# icon (contacts): x | github | mail | telegram | pen | paper-plane   (mono glyphs, src/icons.js)
 # href: full URL opens in a new tab; "/path" is a page on this site; "#say-hi" smooth-scrolls to the contact tiles.
 
 # Browser tab title and search/share description (written into index.html at build).
@@ -26,7 +27,7 @@ profile:
 
 # "What I do": big tinted cards
 features:
-  - emoji: 🔮
+  - icon: crystal-ball
     title: Android Tinkering
     # role: Maintainer
     # description: I maintain a collection of Android devices that can run mainline Linux kernels.
@@ -34,13 +35,13 @@ features:
     href: "https://github.com/DaunScape"
     hue: purple
 
-  - emoji: 🏫
+  - icon: school
     title: Sepuluh Nopember Institute of Technology
     description: Information Technology (2025 - 2029)
     href: "https://its.ac.id"
     hue: red
 
-  - emoji: ☕
+  - icon: hot-beverage
     title: Something new
     description: Let's chit-chat!
     href: "#say-hi"
@@ -80,7 +81,7 @@ contacts:
 
 # "Other doings": one card per category
 projects:
-  - emoji: 💼
+  - icon: briefcase
     title: Work
     hue: orange
     items:
@@ -93,7 +94,7 @@ projects:
         description: Initiated mainline attempt and porting custom ROMs for Android devices.
         href: "https://github.com/DaunScape"
 
-  # - emoji: 🌈
+  # - icon: rainbow
   #   title: Design tools
   #   hue: yellow
   #   items:
@@ -106,7 +107,7 @@ projects:
   #       description: Dynamic theming from a single seed colour.
   #       href: "#"
 
-  # - emoji: 🛠️
+  # - icon: hammer-and-wrench
   #   title: Tools
   #   hue: indigo
   #   items:
@@ -119,7 +120,7 @@ projects:
   #       description: Reproducible dev environment in one command.
   #       href: "#"
 
-  - emoji: 🤖
+  - icon: robot
     title: Hacking
     hue: green
     items:
@@ -132,7 +133,7 @@ projects:
         description: Showing love to my old Android devices that have no custom ROM support.
         href: "#"
 
-  - emoji: 👻
+  - icon: ghost
     title: Misfits
     hue: fuchsia
     items:

@@ -1,6 +1,7 @@
 <script setup>
 // Writings index: sticky year labels on the left, one tinted card per post on the right.
 import BracketLink from '../components/BracketLink.vue'
+import Emoji from '../components/Emoji.vue'
 import { HUES } from '../data.js'
 import { posts, byYear, formatDate } from '../posts.js'
 import { pageTitle, label, cardTitle, column, indexGrid } from '../ui.js'
@@ -28,7 +29,7 @@ const years = byYear(posts)
           <article class="flex flex-col p-4 gap-1 print:break-inside-avoid" :class="HUES[p.hue].strong">
             <div class="flex flex-row justify-between items-start gap-4">
               <h3 :class="cardTitle">
-                <span class="text-[28px] leading-none" aria-hidden="true">{{ p.emoji }}</span>
+                <Emoji :name="p.icon" />
                 <span>{{ p.title }}<span v-if="p.draft" class="opacity-60"> · draft</span></span>
               </h3>
               <time :datetime="p.date" class="opacity-60 tabular-nums whitespace-nowrap pt-1">{{ formatDate(p.date) }}</time>
@@ -47,7 +48,7 @@ const years = byYear(posts)
       <div :class="column">
         <div class="flex flex-col p-4 gap-1" :class="HUES.blue.soft">
           <h3 :class="cardTitle">
-            <span class="text-[28px] leading-none" aria-hidden="true">🫙</span>
+            <Emoji name="jar" />
             <span>Nothing here yet</span>
           </h3>
           <p class="opacity-90">The first post is still in the oven.</p>

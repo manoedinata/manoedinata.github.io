@@ -3,6 +3,7 @@
 // footer band with older / newer posts (DESIGN.md §5.6).
 import { ref, computed, watch, watchEffect, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import BracketLink from '../components/BracketLink.vue'
+import Emoji from '../components/Emoji.vue'
 import NotFound from './NotFound.vue'
 import { HUES, site } from '../data.js'
 import { posts, findPost, loadPost, formatDate } from '../posts.js'
@@ -89,7 +90,7 @@ const band = 'inline-flex items-center gap-1 p-[3px] max-w-[40%] text-fuchsia-70
 
   <template v-else>
     <header class="flex flex-col gap-4">
-      <span class="text-5xl leading-none" aria-hidden="true">{{ meta.emoji }}</span>
+      <Emoji :name="meta.icon" :size="48" />
       <h1
         class="text-5xl sm:text-6xl print:text-5xl tracking-tighter font-bold font-heading text-neutral-950 dark:text-neutral-50 text-balance"
       >

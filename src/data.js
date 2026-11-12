@@ -18,8 +18,8 @@ export const HUES = {
 // ---- Content lives in content.yaml; this file only loads and checks it ----
 
 import content from './content.yaml'
-
-const ICONS = ['x', 'github', 'mail', 'pen', 'paper-plane', 'telegram'] // keep in sync with components/Icon.vue
+import { ICONS } from './icons.js'
+import { EMOJI_NAMES } from './emoji.js'
 
 function check(list, section, key, allowed) {
   for (const entry of list ?? [])
@@ -28,9 +28,11 @@ function check(list, section, key, allowed) {
 }
 
 check(content.features, 'features', 'hue', Object.keys(HUES))
+check(content.features, 'features', 'icon', EMOJI_NAMES)
 check(content.contacts, 'contacts', 'hue', Object.keys(HUES))
 check(content.contacts, 'contacts', 'icon', ICONS)
 check(content.projects, 'projects', 'hue', Object.keys(HUES))
+check(content.projects, 'projects', 'icon', EMOJI_NAMES)
 
 const names = content.profile.names?.length ? content.profile.names.map(String) : [content.profile.name]
 export const profile = { ...content.profile, names, year: new Date().getFullYear() }

@@ -96,7 +96,7 @@ export function readPost(file, hl = null) {
     title: String(front.title),
     date: String(front.date),
     description: front.description ? String(front.description) : '',
-    emoji: front.emoji ? String(front.emoji) : '📝',
+    icon: front.icon ? String(front.icon) : 'memo',
     hue: front.hue ? String(front.hue) : 'blue',
     tags: (front.tags ?? []).map(String),
     draft: Boolean(front.draft),

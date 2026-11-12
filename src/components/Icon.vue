@@ -1,5 +1,7 @@
 <script setup>
-// Mono-colour glyphs for contact tiles. Uses currentColor.
+// Mono-colour glyphs (brand + line icons, see src/icons.js). Uses currentColor.
+import { LINE_ICONS } from '../icons.js'
+
 defineProps({ name: { type: String, required: true }, size: { type: Number, default: 36 } })
 </script>
 
@@ -21,18 +23,20 @@ defineProps({ name: { type: String, required: true }, size: { type: Number, defa
       <path d="M22 7.535V17a3 3 0 0 1-2.824 2.995L19 20H5a3 3 0 0 1-2.995-2.824L2 17V7.535l9.445 6.297l.116.066a1 1 0 0 0 .878 0l.116-.066z" />
       <path d="M19 4c1.08 0 2.027.57 2.555 1.427L12 11.797l-9.555-6.37a3 3 0 0 1 2.354-1.42L5 4z" />
     </g>
-    <g v-else-if="name === 'pen'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 20h4L18.5 9.5a2.828 2.828 0 1 0-4-4L4 16v4" />
-      <path d="M13.5 6.5l4 4" />
-    </g>
-    <g v-else-if="name === 'paper-plane'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M10 14l11 -11" />
-      <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
-    </g>
     <path
       v-else-if="name === 'telegram'"
       fill="currentColor"
       d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
     />
+    <g
+      v-else-if="LINE_ICONS[name]"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path v-for="d in LINE_ICONS[name]" :key="d" :d="d" />
+    </g>
   </svg>
 </template>

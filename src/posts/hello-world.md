@@ -4,7 +4,7 @@ title: Hello, world
 date: 2026-11-12          # YYYY-MM-DD; sorts the list and labels the year
 # Optional
 description: A sample post showing every element the layout styles.
-emoji: 👋                 # default 📝
+icon: waving-hand         # any name in src/assets/emoji/ (default memo)
 hue: blue                 # any hue from src/data.js → HUES (default blue)
 tags: [meta, sample]
 draft: true               # shows in `npm run dev` only; left out of the build

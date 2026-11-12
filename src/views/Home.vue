@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import BracketLink from '../components/BracketLink.vue'
 import Icon from '../components/Icon.vue'
+import Emoji from '../components/Emoji.vue'
 import RotatingName from '../components/RotatingName.vue'
 import { HUES, profile, features, contacts, projects } from '../data.js'
 import { posts, formatDate } from '../posts.js'
@@ -92,7 +93,7 @@ const latest = posts.slice(0, 3)
       >
         <div class="flex flex-col p-4 gap-1" :class="HUES[f.hue].strong">
           <h3 :class="cardTitle">
-            <span class="text-[28px] leading-none" aria-hidden="true">{{ f.emoji }}</span>
+            <Emoji :name="f.icon" />
             <span>{{ f.title }}<span v-if="f.role" class="opacity-70"> · {{ f.role }}</span></span>
           </h3>
           <p>{{ f.description }}</p>
@@ -134,7 +135,7 @@ const latest = posts.slice(0, 3)
         :class="HUES[g.hue].soft"
       >
         <h3 :class="cardTitle">
-          <span class="text-[28px] leading-none" aria-hidden="true">{{ g.emoji }}</span>
+          <Emoji :name="g.icon" />
           <span>{{ g.title }}</span>
         </h3>
         <BracketLink
@@ -160,7 +161,7 @@ const latest = posts.slice(0, 3)
       <div :class="column">
         <section class="flex flex-col p-4 gap-3 print:break-inside-avoid" :class="HUES.blue.soft">
           <h3 :class="cardTitle">
-            <span class="text-[28px] leading-none" aria-hidden="true">📝</span>
+            <Emoji name="memo" />
             <span>Latest</span>
           </h3>
           <BracketLink

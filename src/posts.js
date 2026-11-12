@@ -1,5 +1,6 @@
 // Blog posts live in src/posts/*.md (see plugins/posts.js for the format).
 import { HUES } from './data.js'
+import { EMOJI_NAMES } from './emoji.js'
 
 // Small metadata for lists (eager); bodies are separate chunks, loaded per post.
 const metas = import.meta.glob('./posts/*.md', { eager: true, query: '?meta', import: 'default' })
@@ -8,9 +9,12 @@ const bodies = import.meta.glob('./posts/*.md', { import: 'default' })
 // A build turns drafts into null (see plugins/posts.js).
 const all = Object.values(metas).filter(Boolean)
 
-for (const m of all)
+for (const m of all) {
   if (!HUES[m.hue])
     throw new Error(`src/posts/${m.slug}.md: unknown hue "${m.hue}". Use one of: ${Object.keys(HUES).join(', ')}`)
+  if (!EMOJI_NAMES.includes(m.icon))
+    throw new Error(`src/posts/${m.slug}.md: unknown icon "${m.icon}". Use one of: ${EMOJI_NAMES.join(', ')}`)
+}
 
 // Newest first.
 export const posts = all.sort((a, b) => b.date.localeCompare(a.date))

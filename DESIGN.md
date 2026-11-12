@@ -16,7 +16,7 @@ Confident, playful in small doses, allergic to decoration that doesn't do work.
 | Precise | Square corners everywhere. 2px strokes. Tabular numbers for years. |
 | Curious / playful | A faint self-playing maze-chase game loops behind the page. A tiny "press v to watch the maze" hint invites a closer look. (The reference site uses Conway's Game of Life; we swapped in an original maze chase.) |
 | Organized | Two-column index: sticky section labels on the left, content cards on the right. |
-| Warm | Pastel tinted cards, one hue per category, colour emoji (Noto) as icons. |
+| Warm | Pastel tinted cards, one hue per category, colour Fluent Emoji Flat SVGs (`src/assets/emoji/`) as icons. |
 
 Voice: first-person, short, lowercase-casual where it's a joke ("press v to watch the maze"), otherwise sentence case.
 Taglines are one line. Descriptions are one line. Never paragraphs.
@@ -33,13 +33,13 @@ Taglines are one line. Descriptions are one line. Never paragraphs.
 │  Hi! I make things.                                                       │
 │  One more sentence.                                                       │
 │                                                                           │
-│  What I do  (sticky) │ ┌ Card: tinted, emoji + title · role ─────────┐    │
+│  What I do  (sticky) │ ┌ Card: tinted, icon + title · role ──────────┐    │
 │                      │ └ one-line description ───────────────────────┘    │
 │                      │ ┌ Card ┐ ┌ Card ┐                                   │
 │                                                                           │
 │  Say hi!   (sticky)  │ [tile][tile][tile][tile]  ← square contact tiles   │
 │                                                                           │
-│  Other doings        │ ┌ Group card: emoji + category ───────────────┐    │
+│  Other doings        │ ┌ Group card: icon + category ────────────────┐    │
 │            (sticky)  │ │ Item title ·· role                    2022  │    │
 │                      │ │ one-line description                        │    │
 │                      │ └─────────────────────────────────────────────┘    │
@@ -95,7 +95,7 @@ Hues in use: purple, red, orange, yellow, indigo, green, fuchsia, blue, neutral,
 - **Scale**
   - Name: `text-6xl sm:text-7xl font-bold tracking-tighter` — with a tiny optical kern tweak (`ml-[0.035em]`) on a letter pair.
   - Section label: `text-2xl sm:text-3xl font-semibold tracking-tight`.
-  - Card title: `text-2xl font-semibold tracking-tight`, emoji inline at 32px, `gap-2`.
+  - Card title: `text-2xl font-semibold tracking-tight`, icon inline at 28px, `gap-2`.
   - Item title: `text-lg font-medium leading-snug`.
   - Meta (role/year): `opacity-60`/`opacity-70`, years `tabular-nums`.
   - Description: `opacity-90`.
@@ -115,13 +115,13 @@ Every link is wrapped in a component that draws **two L-shaped corner brackets**
 - Can be re-triggered (used after smooth-scrolling to the contact section).
 
 ### 5.2 FeatureCard
-`flex flex-col p-4 gap-1 bg-{hue}-100 dark:bg-{hue}-900`, whole card is the link. Title row: emoji + name + `· role` at 70% opacity. One-line description.
+`flex flex-col p-4 gap-1 bg-{hue}-100 dark:bg-{hue}-900`, whole card is the link. Title row: icon + name + `· role` at 70% opacity. One-line description.
 
 ### 5.3 ContactTile
-Square, centered, emoji/brand icon (32–36px, tinted `{hue}-900/200`) above a label. `bg-{hue}-100 dark:bg-{hue}-900`, `p-2`, `gap-1 md:gap-2`, `leading-tight`.
+Square, centered, brand/line icon (36px, tinted `{hue}-900/200`) above a label. `bg-{hue}-100 dark:bg-{hue}-900`, `p-2`, `gap-1 md:gap-2`, `leading-tight`.
 
 ### 5.4 GroupCard
-Non-link container `p-4 gap-3 bg-{hue}-50 dark:bg-{hue}-950`. Emoji + category title, then list of BracketLink rows:
+Non-link container `p-4 gap-3 bg-{hue}-50 dark:bg-{hue}-950`. Icon + category title, then list of BracketLink rows:
 `title` left, `year` right (`justify-between items-start gap-4`), description beneath.
 
 ### 5.5 Maze-chase background (`MazeChase.vue`)
@@ -146,10 +146,10 @@ Non-link container `p-4 gap-3 bg-{hue}-50 dark:bg-{hue}-950`. Emoji + category t
 `bg-zinc-100 dark:bg-zinc-800`, `h-24`, prev ◂ / center label + small links / ▸ next, links tinted fuchsia-700/300. Below: tiny legal links and ©.
 
 ### 5.7 Writings (blog)
-- Posts: `src/posts/<slug>.md` with YAML frontmatter (`title`, `date` required; `description`, `emoji`, `hue`, `tags`, `draft`). Rendered at build time by `plugins/posts.js` (marked). URL = `/writings/<slug>/`.
+- Posts: `src/posts/<slug>.md` with YAML frontmatter (`title`, `date` required; `description`, `icon`, `hue`, `tags`, `draft`). Rendered at build time by `plugins/posts.js` (marked). URL = `/writings/<slug>/`.
 - Routing: `vue-router` history mode. The build also writes `writings/index.html`, one `index.html` per post and `404.html`, so GitHub Pages returns 200 with the right `<title>` on deep links.
-- **Index** (`/writings/`): same index grid. Sticky **year** labels left, one FeatureCard per post right (emoji + title, date right in `tabular-nums`, description, `N min read · tags` at 60%).
-- **Post**: emoji + title (`text-5xl sm:text-6xl`) + description. Grid left = sticky meta (date, read time, tag chips in `{hue}-100`) and an "On this page" box (`{hue}-50`, h2/h3 BracketLinks, hidden on phones). Right = `.prose`.
+- **Index** (`/writings/`): same index grid. Sticky **year** labels left, one FeatureCard per post right (icon + title, date right in `tabular-nums`, description, `N min read · tags` at 60%).
+- **Post**: icon (48px) + title (`text-5xl sm:text-6xl`) + description. Grid left = sticky meta (date, read time, tag chips in `{hue}-100`) and an "On this page" box (`{hue}-50`, h2/h3 BracketLinks, hidden on phones). Right = `.prose`.
 - `.prose` (style.css): neutral text; the post hue appears only in link underlines, list markers and `hr`. Code, blockquotes and table stripes use the footer band's `zinc-100/800`. No borders, square corners.
 - Footer band (§5.6) becomes older ‹ · all writings · › newer.
 - A small "‹ home" / "‹ writings" link sits top-left, mirroring the top-right hint.
@@ -175,7 +175,7 @@ Nothing else moves. No parallax, no scroll-reveal, no hover-lift, no shadows.
 **Do**
 - Square corners (`rounded-none`) everywhere.
 - One hue per card; bracket colour = darker shade of the card's hue.
-- Emoji as iconography for categories; mono-colour brand glyphs only for contact tiles.
+- Colour Fluent Emoji SVGs for categories and posts (same look on every OS); mono glyphs only for contact tiles.
 - Keep every description to one line.
 - Support `print:` — hide canvas/footer, collapse grid to one column, show handles under contact tiles.
 
