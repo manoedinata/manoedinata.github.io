@@ -17,7 +17,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
 }
 
-/* Fade-in shared by the maze-chase canvas and its "what's this?" link */
+/* Fade-in shared by the maze-chase canvas and its "press v" hint */
 .animate-gol {
   opacity: 0;
   animation: gol-fade-in 1.2s ease-in-out forwards;

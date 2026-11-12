@@ -73,14 +73,7 @@ const corner = 'text-sm text-neutral-500 hover:text-neutral-700 dark:hover:text-
           <button type="button" :class="[corner, 'cursor-pointer']" @click="toggleMaze">
             press <kbd class="font-sans font-semibold">v</kbd> to watch the maze
           </button>
-          ·
         </span>
-        <a
-          href="https://en.wikipedia.org/wiki/Maze_game"
-          target="_blank"
-          rel="noopener noreferrer"
-          :class="corner"
-        >what's this?</a>
       </div>
 
       <div

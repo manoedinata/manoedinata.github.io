@@ -14,11 +14,11 @@ Confident, playful in small doses, allergic to decoration that doesn't do work.
 |---|---|
 | Understated | No nav bar, no hero image, no CTA buttons. Name + two sentences. |
 | Precise | Square corners everywhere. 2px strokes. Tabular numbers for years. |
-| Curious / playful | A faint self-playing maze-chase game loops behind the page. A tiny "what's this?" link explains it. (The reference site uses Conway's Game of Life; we swapped in an original maze chase.) |
+| Curious / playful | A faint self-playing maze-chase game loops behind the page. A tiny "press v to watch the maze" hint invites a closer look. (The reference site uses Conway's Game of Life; we swapped in an original maze chase.) |
 | Organized | Two-column index: sticky section labels on the left, content cards on the right. |
 | Warm | Pastel tinted cards, one hue per category, colour emoji (Noto) as icons. |
 
-Voice: first-person, short, lowercase-casual where it's a joke ("what's this?"), otherwise sentence case.
+Voice: first-person, short, lowercase-casual where it's a joke ("press v to watch the maze"), otherwise sentence case.
 Taglines are one line. Descriptions are one line. Never paragraphs.
 
 ---
@@ -26,7 +26,7 @@ Taglines are one line. Descriptions are one line. Never paragraphs.
 ## 2. Layout
 
 ```
-┌───────────────────────────────────────────────────────────── what's this? ┐
+┌─────────────────────────────────────────────── press v to watch the maze ┐
 │  [Maze-chase canvas: fixed, full viewport, 6% opacity, behind all]        │
 │                                                                           │
 │  Name (huge, tight)                                                       │
@@ -138,8 +138,8 @@ Non-link container `p-4 gap-3 bg-{hue}-50 dark:bg-{hue}-950`. Emoji + category t
 - Loop: when every pellet is eaten, the walls blink and a new maze appears. When the chomper is caught, it shrinks away and everyone respawns. It never ends.
 - 4 power pellets near the corners give 6s of frightened mode.
 - Runs on `requestAnimationFrame` with a clamped dt, pauses when the tab is hidden, and shows a single static frame when `prefers-reduced-motion` is set.
-- Fades in (`opacity 0→1`, 1.2s, 0.25s delay) together with the "what's this?" link (points to *Maze game* on Wikipedia).
-- **Maze mode**: pressing `v` fades out the whole UI (made `inert`) and shows the maze at full opacity; `v` or `Esc` brings the UI back. In maze mode, arrow keys / WASD hand the chomper to the player (turns are buffered until the next opening; reversing is instant); a bottom hint lists the keys. `Space` (or leaving maze mode) gives control back to the AI; the hint swaps between "to play" and "space for autoplay". A "press v to watch the maze" hint (also clickable) sits before "what's this?", shown only on mouse/trackpad devices, and not on writings pages (index or posts).
+- Fades in (`opacity 0→1`, 1.2s, 0.25s delay) together with the "press v" hint.
+- **Maze mode**: pressing `v` fades out the whole UI (made `inert`) and shows the maze at full opacity; `v` or `Esc` brings the UI back. In maze mode, arrow keys / WASD hand the chomper to the player (turns are buffered until the next opening; reversing is instant); a bottom hint lists the keys. `Space` (or leaving maze mode) gives control back to the AI; the hint swaps between "to play" and "space for autoplay". A "press v to watch the maze" hint (also clickable) sits top-right, shown only on mouse/trackpad devices, and not on writings pages (index or posts).
 - Do **not** copy any existing game's characters, maze or colours. Keep it monochrome and original.
 
 ### 5.6 Footer band
@@ -152,7 +152,7 @@ Non-link container `p-4 gap-3 bg-{hue}-50 dark:bg-{hue}-950`. Emoji + category t
 - **Post**: emoji + title (`text-5xl sm:text-6xl`) + description. Grid left = sticky meta (date, read time, tag chips in `{hue}-100`) and an "On this page" box (`{hue}-50`, h2/h3 BracketLinks, hidden on phones). Right = `.prose`.
 - `.prose` (style.css): neutral text; the post hue appears only in link underlines, list markers and `hr`. Code, blockquotes and table stripes use the footer band's `zinc-100/800`. No borders, square corners.
 - Footer band (§5.6) becomes older ‹ · all writings · › newer.
-- A small "‹ home" / "‹ writings" link sits top-left, mirroring "what's this?".
+- A small "‹ home" / "‹ writings" link sits top-left, mirroring the top-right hint.
 - Drafts render in `npm run dev` only; the build drops their content and metadata.
 
 ---
