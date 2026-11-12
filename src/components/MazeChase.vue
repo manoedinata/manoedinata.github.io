@@ -507,7 +507,7 @@ onBeforeUnmount(() => {
     <canvas
       ref="spot"
       class="spot fixed top-0 left-0 w-screen h-screen dark:invert pointer-events-none select-none -z-30 transition-opacity duration-300"
-      :class="spotVisible ? 'opacity-90' : 'opacity-0'"
+      :class="spotVisible ? 'opacity-75' : 'opacity-0'"
       :style="{ '--r': `${SPOT.radius}px` }"
     />
   </div>
