@@ -156,33 +156,32 @@ const latest = posts.slice(0, 3)
     </div>
 
     <!-- Writings -->
-    <template v-if="latest.length">
-      <div class="scroll-mt-6"><h2 :class="label">Writings</h2></div>
-      <div :class="column">
-        <section class="flex flex-col p-4 gap-3 print:break-inside-avoid" :class="HUES.blue.soft">
-          <h3 :class="cardTitle">
-            <Emoji name="memo" />
-            <span>Latest</span>
-          </h3>
-          <BracketLink
-            v-for="p in latest"
-            :key="p.slug"
-            :href="`/writings/${p.slug}/`"
-            :light="HUES.blue.light"
-            :dark="HUES.blue.dark"
-            class="flex flex-col"
-          >
-            <div class="flex flex-row justify-between items-start gap-4">
-              <h4 class="text-lg leading-snug font-medium">{{ p.title }}</h4>
-              <span class="opacity-60 tabular-nums whitespace-nowrap">{{ formatDate(p.date) }}</span>
-            </div>
-            <span v-if="p.description" class="opacity-90">{{ p.description }}</span>
-          </BracketLink>
-          <BracketLink href="/writings/" :light="HUES.blue.light" :dark="HUES.blue.dark" class="self-start opacity-70 hover:opacity-100">
-            All writings ›
-          </BracketLink>
-        </section>
-      </div>
-    </template>
+    <div class="scroll-mt-6"><h2 :class="label">Writings</h2></div>
+    <div :class="column">
+      <section class="flex flex-col p-4 gap-3 print:break-inside-avoid" :class="HUES.blue.soft">
+        <h3 :class="cardTitle">
+          <Emoji :name="latest.length ? 'memo' : 'jar'" />
+          <span>{{ latest.length ? 'Latest' : 'Nothing here yet' }}</span>
+        </h3>
+        <p v-if="!latest.length" class="opacity-90">The first post is still in the oven.</p>
+        <BracketLink
+          v-for="p in latest"
+          :key="p.slug"
+          :href="`/writings/${p.slug}/`"
+          :light="HUES.blue.light"
+          :dark="HUES.blue.dark"
+          class="flex flex-col"
+        >
+          <div class="flex flex-row justify-between items-start gap-4">
+            <h4 class="text-lg leading-snug font-medium">{{ p.title }}</h4>
+            <span class="opacity-60 tabular-nums whitespace-nowrap">{{ formatDate(p.date) }}</span>
+          </div>
+          <span v-if="p.description" class="opacity-90">{{ p.description }}</span>
+        </BracketLink>
+        <BracketLink href="/writings/" :light="HUES.blue.light" :dark="HUES.blue.dark" class="self-start opacity-70 hover:opacity-100">
+          All writings ›
+        </BracketLink>
+      </section>
+    </div>
   </div>
 </template>
