@@ -9,9 +9,10 @@ import { profile, footerLinks } from './data.js'
 import { muted } from './ui.js'
 
 const route = useRoute()
+// Top-left back links, nearest parent first.
 const back = computed(() => {
-  if (route.name === 'post') return { href: '/writings/', label: 'writings' }
-  if (route.name && route.name !== 'home') return { href: '/', label: 'home' }
+  if (route.name === 'post') return [{ href: '/writings/', label: 'writings' }, { href: '/', label: 'home' }]
+  if (route.name && route.name !== 'home') return [{ href: '/', label: 'home' }]
   return null
 })
 
@@ -38,7 +39,7 @@ const corner = 'text-sm text-neutral-500 hover:text-neutral-700 dark:hover:text-
 
 <template>
   <main class="flex flex-row justify-center">
-    <MazeChase :spotlight="route.name !== 'post' && !mazeOnly" :full="mazeOnly" @playing="playing = $event" />
+    <MazeChase :spotlight="route.name !== 'post' && !mazeOnly" :full="mazeOnly" :off="route.name === 'post'" @playing="playing = $event" />
 
     <!-- Maze mode controls hint -->
     <Transition
@@ -62,11 +63,11 @@ const corner = 'text-sm text-neutral-500 hover:text-neutral-700 dark:hover:text-
       :class="mazeOnly ? 'opacity-0 pointer-events-none' : ''"
       :inert="mazeOnly"
     >
-      <div v-if="back" class="absolute top-0 left-0 py-2 px-3 print:hidden">
-        <RouterLink :to="back.href" :class="corner">
-          ‹ {{ back.label }}
+      <nav v-if="back" aria-label="Back" class="absolute top-0 left-0 py-2 px-3 flex flex-col items-start print:hidden">
+        <RouterLink v-for="b in back" :key="b.href" :to="b.href" :class="corner">
+          ‹ {{ b.label }}
         </RouterLink>
-      </div>
+      </nav>
       <div class="absolute top-0 right-0 py-2 px-3 animate-gol print:hidden">
         <!-- Keyboard hint: only where there's a mouse/trackpad (and so, most likely, a keyboard). -->
         <span v-if="mazeAllowed" class="hidden [@media(hover:hover)_and_(pointer:fine)]:inline text-sm text-neutral-500">
@@ -78,7 +79,7 @@ const corner = 'text-sm text-neutral-500 hover:text-neutral-700 dark:hover:text-
 
       <div
         class="flex flex-col gap-16 sm:gap-24 print:gap-8 px-4 py-8 w-full max-w-screen-xl sm:px-16 sm:py-20 print:p-0"
-        :class="{ 'pt-14': back }"
+        :class="back?.length > 1 ? 'pt-18' : { 'pt-14': back }"
       >
         <RouterView v-slot="{ Component, route: r }">
           <component :is="Component" :key="r.path" />

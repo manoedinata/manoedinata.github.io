@@ -7,6 +7,7 @@ import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
 const props = defineProps({
   spotlight: { type: Boolean, default: true }, // cursor spotlight on/off (off while reading a post)
   full: { type: Boolean, default: false }, // maze mode: full opacity, and arrow keys / WASD steer the chomper
+  off: { type: Boolean, default: false }, // hidden and paused (blog posts: plain background)
 })
 const emit = defineEmits(['playing']) // true while a player steers, false when the AI drives
 
@@ -460,7 +461,7 @@ function loop(now) {
 }
 
 function start() {
-  if (running || !game) return
+  if (running || !game || (props.off && !offTimer)) return // off: only while still fading out
   running = true
   last = performance.now()
   raf = requestAnimationFrame(loop)
@@ -522,6 +523,19 @@ watch(
   },
 )
 watch(() => props.spotlight, (on) => on || onPointerLeave())
+// Off/on: cross-fade the whole maze (FADE_MS, matches the template's duration-700);
+// it keeps moving while it fades out and pauses once invisible.
+const FADE_MS = 700
+let offTimer = 0
+watch(
+  () => props.off,
+  (off) => {
+    clearTimeout(offTimer)
+    offTimer = 0
+    if (off) offTimer = setTimeout(() => ((offTimer = 0), stop()), FADE_MS)
+    else if (document.visibilityState === 'visible' && !reducedMotion()) start()
+  },
+)
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const onVisibility = () => (document.visibilityState === 'visible' && !reducedMotion() ? start() : stop())
@@ -551,6 +565,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   stop()
   clearTimeout(resizeTimer)
+  clearTimeout(offTimer)
   observer?.disconnect()
   document.removeEventListener('visibilitychange', onVisibility)
   window.removeEventListener('keydown', onKeyDown)
@@ -561,17 +576,19 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="-z-30 animate-gol print:hidden" aria-hidden="true">
-    <canvas
-      ref="canvas"
-      class="fixed top-0 left-0 w-screen h-screen dark:invert pointer-events-none select-none -z-30 transition-opacity duration-500"
-      :class="full ? 'opacity-100' : 'opacity-[0.06] dark:opacity-[0.09]'"
-    />
-    <canvas
-      ref="spot"
-      class="spot fixed top-0 left-0 w-screen h-screen dark:invert pointer-events-none select-none -z-30 transition-opacity duration-300"
-      :class="spotVisible ? 'opacity-75' : 'opacity-0'"
-      :style="{ '--r': `${SPOT.radius}px` }"
-    />
+    <div class="transition-opacity duration-700 ease-in-out" :class="{ 'opacity-0': off }">
+      <canvas
+        ref="canvas"
+        class="fixed top-0 left-0 w-screen h-screen dark:invert pointer-events-none select-none -z-30 transition-opacity duration-500"
+        :class="full ? 'opacity-100' : 'opacity-[0.06] dark:opacity-[0.09]'"
+      />
+      <canvas
+        ref="spot"
+        class="spot fixed top-0 left-0 w-screen h-screen dark:invert pointer-events-none select-none -z-30 transition-opacity duration-300"
+        :class="spotVisible ? 'opacity-75' : 'opacity-0'"
+        :style="{ '--r': `${SPOT.radius}px` }"
+      />
+    </div>
   </div>
 </template>
 
