@@ -1,7 +1,7 @@
 <script setup>
 // Single post: title block, sticky meta + contents on the left, prose on the right,
 // footer band with older / newer posts (DESIGN.md §5.6).
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watch, watchEffect, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import BracketLink from '../components/BracketLink.vue'
 import NotFound from './NotFound.vue'
 import { HUES, site } from '../data.js'
@@ -26,6 +26,60 @@ watchEffect(async () => {
   const loaded = await loadPost(slug)
   if (slug === props.slug) body.value = loaded
 })
+
+// Contents highlight: the last heading that has scrolled past the top of the viewport.
+const ACTIVE_LINE = 96 // px from the top
+const active = ref('')
+let frame = 0
+function updateActive() {
+  frame = 0
+  const hs = body.value?.headings ?? []
+  let id = ''
+  for (const h of hs) {
+    const el = document.getElementById(h.id)
+    if (!el || el.getBoundingClientRect().top > ACTIVE_LINE) break
+    id = h.id
+  }
+  // At the very bottom, a short last section never reaches the line: mark it anyway.
+  const atBottom = innerHeight + scrollY >= document.documentElement.scrollHeight - 2
+  if (atBottom && hs.length && scrollY > 0) id = hs.at(-1).id
+  active.value = id
+}
+const onScroll = () => (frame ||= requestAnimationFrame(updateActive))
+watch(body, async () => {
+  await nextTick()
+  // The body arrives after the router's scrollBehavior ran, so honour #heading links here.
+  if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView()
+  updateActive()
+})
+onMounted(() => {
+  addEventListener('scroll', onScroll, { passive: true })
+  addEventListener('resize', onScroll, { passive: true })
+})
+onBeforeUnmount(() => {
+  cancelAnimationFrame(frame)
+  removeEventListener('scroll', onScroll)
+  removeEventListener('resize', onScroll)
+})
+
+// Copy buttons in code blocks (rendered by plugins/posts.js).
+async function onArticleClick(e) {
+  const btn = e.target.closest?.('.code-block .copy')
+  if (!btn) return
+  const code = btn.parentElement.querySelector('pre code') ?? btn.parentElement.querySelector('pre')
+  try {
+    await navigator.clipboard.writeText(code.textContent)
+  } catch {
+    return // clipboard blocked: leave the icon as is
+  }
+  btn.setAttribute('data-copied', '')
+  btn.setAttribute('aria-label', 'Copied')
+  clearTimeout(btn._reset)
+  btn._reset = setTimeout(() => {
+    btn.removeAttribute('data-copied')
+    btn.setAttribute('aria-label', 'Copy code')
+  }, 1500)
+}
 
 const band = 'inline-flex items-center gap-1 p-[3px] max-w-[40%] text-fuchsia-700 dark:text-fuchsia-300'
 </script>
@@ -69,8 +123,12 @@ const band = 'inline-flex items-center gap-1 p-[3px] max-w-[40%] text-fuchsia-70
               :href="`#${h.id}`"
               :light="hue.light"
               :dark="hue.dark"
-              class="self-start leading-snug"
-              :class="h.depth === 3 ? 'ms-4 text-sm opacity-80' : ''"
+              class="self-start leading-snug transition-opacity"
+              :class="[
+                h.depth === 3 ? 'ms-4 text-sm' : '',
+                h.id === active ? 'font-semibold text-neutral-950 dark:text-neutral-50' : 'opacity-70 hover:opacity-100',
+              ]"
+              :aria-current="h.id === active ? 'location' : undefined"
             >
               {{ h.text }}
             </BracketLink>
@@ -81,6 +139,7 @@ const band = 'inline-flex items-center gap-1 p-[3px] max-w-[40%] text-fuchsia-70
       <!-- Right: the post -->
       <article
         class="prose mb-8 sm:mb-20 print:mb-6 min-w-0"
+        @click="onArticleClick"
         :style="{ '--accent-light': hue.light, '--accent-dark': hue.dark }"
       >
         <div v-if="body" v-html="body.html" />

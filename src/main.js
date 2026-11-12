@@ -16,7 +16,8 @@ const router = createRouter({
   ],
   scrollBehavior(to, from, saved) {
     if (saved) return saved
-    if (to.hash) return { el: to.hash, top: 24 }
+    // Post bodies load async; Post.vue scrolls to the hash itself once the heading exists.
+    if (to.hash) return document.getElementById(decodeURIComponent(to.hash.slice(1))) ? { el: to.hash, top: 24 } : { top: 0 }
     if (to.path !== from.path) return { top: 0 }
   },
 })
