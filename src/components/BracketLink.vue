@@ -1,17 +1,31 @@
 <script setup>
 // Link with animated L-shaped corner brackets (DESIGN.md §5.1).
 // `light` / `dark` set the bracket colour; usually the 700 / 300 shade of the card's hue.
+// href: "https://…" opens a new tab, "/path" is an in-app route (RouterLink), anything else is a plain link.
+import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
+
 const props = defineProps({
   href: { type: String, required: true },
   light: { type: String, default: '#404040' },
   dark: { type: String, default: '#d4d4d4' },
 })
 
-const external = /^https?:\/\//.test(props.href)
+const external = computed(() => /^https?:\/\//.test(props.href))
+const internal = computed(() => props.href.startsWith('/'))
 </script>
 
 <template>
+  <RouterLink
+    v-if="internal"
+    :to="href"
+    class="bracket-link"
+    :style="{ '--link-border-color-light': light, '--link-border-color-dark': dark }"
+  >
+    <slot />
+  </RouterLink>
   <a
+    v-else
     :href="href"
     class="bracket-link"
     :style="{ '--link-border-color-light': light, '--link-border-color-dark': dark }"

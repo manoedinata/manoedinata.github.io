@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import { parse } from 'yaml'
+import posts from './plugins/posts.js'
 
 const CONTENT = new URL('./src/content.yaml', import.meta.url)
 
@@ -19,12 +20,18 @@ const escape = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 
 // Fill %SITE_TITLE% / %SITE_DESCRIPTION% in index.html from content.yaml.
+const readContent = () => parse(readFileSync(CONTENT, 'utf8')) ?? {}
+const siteTitle = () => {
+  const { site = {}, profile = {} } = readContent()
+  return site.title || profile.name
+}
+
 const siteMeta = () => ({
   name: 'site-meta',
   transformIndexHtml(html) {
-    const { site = {}, profile = {} } = parse(readFileSync(CONTENT, 'utf8')) ?? {}
+    const { site = {}, profile = {} } = readContent()
     return html
-      .replaceAll('%SITE_TITLE%', escape(site.title || profile.name))
+      .replaceAll('%SITE_TITLE%', escape(siteTitle()))
       .replaceAll('%SITE_DESCRIPTION%', escape(site.description || profile.lines?.[0]))
   },
   // index.html is not a module, so reload the page when the content changes.
@@ -36,5 +43,5 @@ const siteMeta = () => ({
 export default defineConfig({
   // Set by the Pages workflow: "/" for a custom domain, "/<repo>/" for a project site.
   base: process.env.BASE_PATH || '/',
-  plugins: [yaml(), siteMeta(), vue(), tailwindcss()],
+  plugins: [yaml(), siteMeta(), posts({ siteTitle }), vue(), tailwindcss()],
 })

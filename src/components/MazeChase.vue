@@ -2,7 +2,11 @@
 // Self-playing maze-chase in the page background (DESIGN.md §5.5).
 // A box-shaped "chomper" eats pellets while "glitch" critters hunt it.
 // Everything is AI-driven and loops forever: clear the maze → new maze; get caught → respawn.
-import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
+
+const props = defineProps({
+  spotlight: { type: Boolean, default: true }, // cursor spotlight on/off (off while reading a post)
+})
 
 const TILE = 24 // px per maze tile (3×3 background cells)
 const CELL = 8 // background pixel-grid cell, same as the old Game of Life
@@ -444,6 +448,7 @@ function stop() {
 }
 
 function onPointerMove(e) {
+  if (!props.spotlight) return
   if (!pointer) pointer = { x: e.clientX, y: e.clientY }
   pointer.tx = e.clientX
   pointer.ty = e.clientY
@@ -457,6 +462,7 @@ function onPointerMove(e) {
   }
 }
 const onPointerLeave = () => (spotVisible.value = false)
+watch(() => props.spotlight, (on) => on || onPointerLeave())
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const onVisibility = () => (document.visibilityState === 'visible' && !reducedMotion() ? start() : stop())
@@ -501,7 +507,7 @@ onBeforeUnmount(() => {
     <canvas
       ref="spot"
       class="spot fixed top-0 left-0 w-screen h-screen dark:invert pointer-events-none select-none -z-30 transition-opacity duration-300"
-      :class="spotVisible ? 'opacity-75' : 'opacity-0'"
+      :class="spotVisible ? 'opacity-90' : 'opacity-0'"
       :style="{ '--r': `${SPOT.radius}px` }"
     />
   </div>

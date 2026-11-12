@@ -38,3 +38,4 @@ export const features = content.features ?? []
 export const contacts = content.contacts ?? []
 export const projects = content.projects ?? []
 export const footerLinks = content.footer?.links ?? []
+export const site = { title: content.site?.title || content.profile.name, description: content.site?.description ?? '' }

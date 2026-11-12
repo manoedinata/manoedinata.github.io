@@ -27,3 +27,63 @@ html {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* ---- Post body (Post.vue). Same rules as the rest: square, flat, neutral text, hue only as accent. ---- */
+.prose {
+  --accent: var(--accent-light, #404040);
+  @apply leading-relaxed text-[1.0625rem];
+}
+@media (prefers-color-scheme: dark) {
+  .prose { --accent: var(--accent-dark, #d4d4d4); }
+}
+.prose > div > * + * { @apply mt-5; }
+.prose > div > :first-child { @apply mt-0; }
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  @apply font-heading tracking-tight font-semibold text-neutral-950 dark:text-neutral-50 scroll-mt-6 leading-tight;
+}
+.prose h2 { @apply text-2xl sm:text-3xl mt-12; }
+.prose h3 { @apply text-xl sm:text-2xl mt-10; }
+.prose h4 { @apply text-lg mt-8; }
+.prose :is(h2, h3, h4) + * { @apply mt-3; }
+
+.prose a {
+  @apply underline underline-offset-[3px] decoration-2 transition-colors;
+  text-decoration-color: var(--accent);
+}
+.prose a:hover { color: var(--accent); }
+
+.prose strong { @apply font-semibold text-neutral-950 dark:text-neutral-50; }
+.prose ul { @apply list-[square] ps-6; }
+.prose ol { @apply list-decimal ps-6; }
+.prose li + li,
+.prose li > ul,
+.prose li > ol { @apply mt-1.5; }
+.prose li::marker { color: var(--accent); }
+
+.prose blockquote {
+  @apply bg-zinc-100 dark:bg-zinc-800 p-4 italic;
+}
+.prose blockquote > * + * { @apply mt-3; }
+
+.prose code {
+  @apply font-mono text-[0.875em] bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5;
+}
+.prose pre {
+  @apply bg-zinc-100 dark:bg-zinc-800 p-4 overflow-x-auto text-sm leading-normal;
+}
+.prose pre code { @apply bg-transparent p-0 text-[1em]; }
+
+.prose img,
+.prose video { @apply max-w-full h-auto; }
+
+.prose hr { @apply border-0 h-0.5 my-10 w-16 mx-auto; background: var(--accent); }
+
+.prose table { @apply w-full text-left tabular-nums; }
+.prose th { @apply font-semibold text-neutral-950 dark:text-neutral-50; }
+.prose th,
+.prose td { @apply py-1.5 pe-4 align-top; }
+.prose thead,
+.prose tbody tr:nth-child(even) { @apply bg-zinc-100/60 dark:bg-zinc-800/60; }

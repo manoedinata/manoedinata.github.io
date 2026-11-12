@@ -3,7 +3,7 @@
 # hue: purple | red | orange | yellow | green | blue | indigo | fuchsia | neutral | latte | slate
 #      (defined in src/data.js → HUES)
 # icon (contacts only): x | github | mail | pen | paper-plane | telegram   (defined in src/components/Icon.vue)
-# href: full URL opens in a new tab; "#say-hi" smooth-scrolls to the contact tiles.
+# href: full URL opens in a new tab; "/path" is a page on this site; "#say-hi" smooth-scrolls to the contact tiles.
 
 # Browser tab title and search/share description (written into index.html at build).
 # Leave title empty to use profile.name.
@@ -75,7 +75,7 @@ contacts:
 
   - label: Blog
     icon: pen
-    href: "https://ndraa.xyz/writings"
+    href: "/writings/"
     hue: blue
 
 # "Other doings": one card per category
