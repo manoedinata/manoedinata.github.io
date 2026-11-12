@@ -139,6 +139,7 @@ Non-link container `p-4 gap-3 bg-{hue}-50 dark:bg-{hue}-950`. Emoji + category t
 - 4 power pellets near the corners give 6s of frightened mode.
 - Runs on `requestAnimationFrame` with a clamped dt, pauses when the tab is hidden, and shows a single static frame when `prefers-reduced-motion` is set.
 - Fades in (`opacity 0→1`, 1.2s, 0.25s delay) together with the "what's this?" link (points to *Maze game* on Wikipedia).
+- **Maze mode**: pressing `v` fades out the whole UI (made `inert`) and shows the maze at full opacity; `v` or `Esc` brings the UI back. In maze mode, arrow keys / WASD hand the chomper to the player (turns are buffered until the next opening; reversing is instant); a bottom hint lists the keys. `Space` (or leaving maze mode) gives control back to the AI; the hint swaps between "to play" and "space for autoplay". A "press v to watch the maze" hint (also clickable) sits before "what's this?", shown only on mouse/trackpad devices, and not on writings pages (index or posts).
 - Do **not** copy any existing game's characters, maze or colours. Keep it monochrome and original.
 
 ### 5.6 Footer band

@@ -6,7 +6,9 @@ import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
 
 const props = defineProps({
   spotlight: { type: Boolean, default: true }, // cursor spotlight on/off (off while reading a post)
+  full: { type: Boolean, default: false }, // maze mode: full opacity, and arrow keys / WASD steer the chomper
 })
+const emit = defineEmits(['playing']) // true while a player steers, false when the AI drives
 
 const TILE = 24 // px per maze tile (3×3 background cells)
 const CELL = 8 // background pixel-grid cell, same as the old Game of Life
@@ -84,8 +86,10 @@ function generateMaze(cols, rows) {
 // ---------- game ----------
 
 class Game {
-  constructor(ctx, width, height) {
+  // control: { manual, want } shared with the component; manual = a player steers the chomper.
+  constructor(ctx, width, height, control = { manual: false, want: null }) {
     this.ctx = ctx
+    this.control = control
     this.width = width
     this.height = height
     this.cols = Math.max(7, Math.floor(width / TILE) | 1) // odd
@@ -193,7 +197,25 @@ class Game {
     return this.time < this.powerUntil
   }
 
+  // Player: take the wanted turn as soon as it is open, otherwise keep going until a wall.
+  steerPlayer(a) {
+    const { want } = this.control
+    if (want && this.open(a.tx + want.dx, a.ty + want.dy)) return want
+    if (this.open(a.tx + a.dir.dx, a.ty + a.dir.dy)) return a.dir
+    return null // wait at the wall
+  }
+
+  // Reversing mid-tile is instant, so the controls feel responsive.
+  turn(d) {
+    const c = this.chomper
+    if (d.dx !== -c.dir.dx || d.dy !== -c.dir.dy || c.t >= 1) return
+    ;[c.x, c.tx, c.y, c.ty] = [c.tx, c.x, c.ty, c.y]
+    c.t = 1 - c.t
+    c.dir = d
+  }
+
   steerChomper(a) {
+    if (this.control.manual) return this.steerPlayer(a)
     const { all } = this.choices(a)
     const threats = this.hunters.filter((h) => !h.eaten && this.time >= h.release)
     const scared = this.powered()
@@ -395,6 +417,7 @@ let last = 0
 let running = false
 let observer = null
 let resizeTimer = 0
+const control = { manual: false, want: null } // survives rebuilds on resize
 
 function build() {
   const el = canvas.value
@@ -408,7 +431,7 @@ function build() {
   spot.value.width = el.width
   spot.value.height = el.height
   spotCtx = spot.value.getContext('2d')
-  game = new Game(ctx, rect.width, rect.height)
+  game = new Game(ctx, rect.width, rect.height, control)
   render()
 }
 
@@ -462,6 +485,42 @@ function onPointerMove(e) {
   }
 }
 const onPointerLeave = () => (spotVisible.value = false)
+
+// Maze mode controls: the first arrow / WASD press hands the chomper to the player.
+const KEYS = {
+  ArrowRight: DIRS[0], d: DIRS[0], D: DIRS[0],
+  ArrowLeft: DIRS[1], a: DIRS[1], A: DIRS[1],
+  ArrowDown: DIRS[2], s: DIRS[2], S: DIRS[2],
+  ArrowUp: DIRS[3], w: DIRS[3], W: DIRS[3],
+}
+function setManual(on) {
+  if (control.manual !== on) emit('playing', on)
+  control.manual = on
+  if (!on) control.want = null
+}
+function onKeyDown(e) {
+  if (!props.full || e.ctrlKey || e.metaKey || e.altKey) return
+  if (e.key === ' ') {
+    e.preventDefault()
+    setManual(false) // space: back to autoplay
+    return
+  }
+  const d = KEYS[e.key]
+  if (!d) return
+  e.preventDefault() // no page scrolling under the maze
+  setManual(true)
+  control.want = d
+  game?.turn(d)
+  start() // play even when reduced motion keeps the background still
+}
+watch(
+  () => props.full,
+  (on) => {
+    if (on) return
+    setManual(false) // AI takes over again
+    if (reducedMotion()) stop()
+  },
+)
 watch(() => props.spotlight, (on) => on || onPointerLeave())
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -482,6 +541,7 @@ onMounted(() => {
   observer.observe(canvas.value)
   if (!reducedMotion()) start()
   document.addEventListener('visibilitychange', onVisibility)
+  window.addEventListener('keydown', onKeyDown)
   if (hasCursor()) {
     window.addEventListener('pointermove', onPointerMove, { passive: true })
     document.documentElement.addEventListener('pointerleave', onPointerLeave)
@@ -493,6 +553,7 @@ onBeforeUnmount(() => {
   clearTimeout(resizeTimer)
   observer?.disconnect()
   document.removeEventListener('visibilitychange', onVisibility)
+  window.removeEventListener('keydown', onKeyDown)
   window.removeEventListener('pointermove', onPointerMove)
   document.documentElement.removeEventListener('pointerleave', onPointerLeave)
 })
@@ -502,7 +563,8 @@ onBeforeUnmount(() => {
   <div class="-z-30 animate-gol print:hidden" aria-hidden="true">
     <canvas
       ref="canvas"
-      class="fixed top-0 left-0 w-screen h-screen opacity-[0.06] dark:opacity-[0.09] dark:invert pointer-events-none select-none -z-30"
+      class="fixed top-0 left-0 w-screen h-screen dark:invert pointer-events-none select-none -z-30 transition-opacity duration-500"
+      :class="full ? 'opacity-100' : 'opacity-[0.06] dark:opacity-[0.09]'"
     />
     <canvas
       ref="spot"
