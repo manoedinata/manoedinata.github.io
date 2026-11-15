@@ -99,6 +99,19 @@ async function localizeImages(markdown, dir) {
   )
 }
 
+// Notion's Heading 1/2/3 become ##/###/####: the post title is the page's <h1>, and the
+// table of contents lists ## and ###. Code fences are left alone.
+function demoteHeadings(markdown) {
+  let fence = false
+  return markdown
+    .split('\n')
+    .map((line) => {
+      if (/^\s*(```|~~~)/.test(line)) fence = !fence
+      return !fence && /^#{1,5} /.test(line) ? `#${line}` : line
+    })
+    .join('\n')
+}
+
 // Front matter of an existing post, or null if it has none.
 function frontOf(file) {
   const m = /^---\r?\n([\s\S]*?)\r?\n---/.exec(readFileSync(file, 'utf8'))
@@ -112,17 +125,15 @@ function frontOf(file) {
 // The data source id for the Posts database, from a page in it or the database id.
 async function resolveDataSourceId(seedId) {
   try {
-    const page = await notion.pages.retrieve({ page_id: seedId })
-    if (page.parent?.data_source_id) return page.parent.data_source_id
-    if (page.parent?.database_id) {
-      const db = await notion.databases.retrieve({ database_id: page.parent.database_id })
-      return db.data_sources?.[0]?.id ?? page.parent.database_id
-    }
+    const db = await notion.databases.retrieve({ database_id: seedId })
+    return db.data_sources?.[0]?.id ?? seedId
   } catch {
-    /* not a page */
+    /* not a database: treat it as a page in one */
   }
-  const db = await notion.databases.retrieve({ database_id: seedId })
-  return db.data_sources?.[0]?.id ?? seedId
+  const page = await notion.pages.retrieve({ page_id: seedId })
+  if (page.parent?.data_source_id) return page.parent.data_source_id
+  const db = await notion.databases.retrieve({ database_id: page.parent.database_id })
+  return db.data_sources?.[0]?.id ?? page.parent.database_id
 }
 
 async function queryAllPages(dataSourceId) {
@@ -186,7 +197,7 @@ for (const page of pages) {
   // Start the image folder fresh so removed images go too; names are content-hashed, so unchanged ones produce no diff.
   const imageDir = join(IMAGES_DIR, slug)
   rmSync(imageDir, { recursive: true, force: true })
-  const body = await localizeImages(n2m.toMarkdownString(await n2m.pageToMarkdown(page.id)).parent || '', imageDir)
+  const body = demoteHeadings(await localizeImages(n2m.toMarkdownString(await n2m.pageToMarkdown(page.id)).parent || '', imageDir))
 
   writeFileSync(file, `---\n${stringifyYaml(front).trimEnd()}\n---\n\n${body.trim()}\n`)
   written.add(slug)
