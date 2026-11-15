@@ -76,6 +76,8 @@ watch(titleEl, (el, _, onCleanup) => {
   onCleanup(() => io.disconnect())
 })
 
+const toTop = () => scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+
 // Copy buttons in code blocks (rendered by plugins/posts.js).
 async function onArticleClick(e) {
   const btn = e.target.closest?.('.code-block .copy')
@@ -102,6 +104,30 @@ const band = 'inline-flex items-center gap-1 p-[3px] max-w-[40%] text-fuchsia-70
   <NotFound v-if="!meta" />
 
   <template v-else>
+    <!-- Phones: slim bar once the title has scrolled away (wider screens repeat it in the sticky column instead). -->
+    <Transition
+      enter-active-class="transition-transform duration-200 motion-reduce:transition-none"
+      leave-active-class="transition-transform duration-150 motion-reduce:transition-none"
+      enter-from-class="-translate-y-full"
+      leave-to-class="-translate-y-full"
+    >
+      <nav
+        v-if="titleAway"
+        aria-label="Post"
+        class="sm:hidden print:hidden fixed top-0 inset-x-0 z-10 h-11 flex items-center gap-1 px-2"
+        :class="hue.soft"
+      >
+        <RouterLink to="/writings/" aria-label="All writings" class="shrink-0 px-2 py-1 text-lg leading-none opacity-70">‹</RouterLink>
+        <button
+          type="button"
+          class="min-w-0 flex-1 truncate text-left font-semibold font-heading tracking-tight text-neutral-950 dark:text-neutral-50"
+          @click="toTop"
+        >
+          {{ meta.title }}<span class="sr-only"> (back to top)</span>
+        </button>
+      </nav>
+    </Transition>
+
     <header class="flex flex-col gap-4">
       <Emoji :name="meta.icon" :size="48" />
       <h1
@@ -167,7 +193,7 @@ const band = 'inline-flex items-center gap-1 p-[3px] max-w-[40%] text-fuchsia-70
 
       <!-- Right: the post -->
       <article
-        class="prose mb-8 sm:mb-20 print:mb-6 min-w-0"
+        class="prose mb-8 sm:mb-20 print:mb-6 min-w-0 [&_:is(h2,h3,h4)]:scroll-mt-14 sm:[&_:is(h2,h3,h4)]:scroll-mt-0"
         @click="onArticleClick"
         :style="{ '--accent-light': hue.light, '--accent-dark': hue.dark }"
       >
