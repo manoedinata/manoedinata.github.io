@@ -63,6 +63,19 @@ onBeforeUnmount(() => {
   removeEventListener('resize', onScroll)
 })
 
+// Once the big title scrolls out of view, repeat it above the date in the sticky column.
+const titleEl = ref(null)
+const titleAway = ref(false)
+watch(titleEl, (el, _, onCleanup) => {
+  titleAway.value = false
+  if (!el) return
+  const io = new IntersectionObserver(([e]) => (titleAway.value = !e.isIntersecting && e.boundingClientRect.bottom < innerHeight / 2), {
+    rootMargin: '-24px 0px 0px 0px', // the column sticks at top-6
+  })
+  io.observe(el)
+  onCleanup(() => io.disconnect())
+})
+
 // Copy buttons in code blocks (rendered by plugins/posts.js).
 async function onArticleClick(e) {
   const btn = e.target.closest?.('.code-block .copy')
@@ -92,6 +105,7 @@ const band = 'inline-flex items-center gap-1 p-[3px] max-w-[40%] text-fuchsia-70
     <header class="flex flex-col gap-4">
       <Emoji :name="meta.icon" :size="48" />
       <h1
+        ref="titleEl"
         class="text-5xl sm:text-6xl print:text-5xl tracking-tighter font-bold font-heading text-neutral-950 dark:text-neutral-50 text-balance"
       >
         {{ meta.title }}
@@ -103,6 +117,19 @@ const band = 'inline-flex items-center gap-1 p-[3px] max-w-[40%] text-fuchsia-70
       <!-- Left: meta + contents. Sticky on wide screens, stacked above the post on phones. -->
       <aside class="print:mb-4">
         <div class="sm:sticky sm:top-6 flex flex-col gap-4">
+          <div>
+            <!-- Compact title, shown once the header has scrolled away. Wide screens only: on phones the column doesn't stick. -->
+            <div
+              aria-hidden="true"
+              class="hidden sm:grid print:hidden transition-[grid-template-rows,opacity] duration-300 motion-reduce:transition-none"
+              :class="titleAway ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
+            >
+              <div class="overflow-hidden">
+                <p class="pb-3 text-xl leading-tight tracking-tight font-bold font-heading text-neutral-950 dark:text-neutral-50 text-balance">
+                  {{ meta.title }}
+                </p>
+              </div>
+          </div>
           <dl class="flex flex-col gap-1">
             <div class="flex gap-2">
               <dt class="sr-only">Published</dt>
@@ -115,6 +142,7 @@ const band = 'inline-flex items-center gap-1 p-[3px] max-w-[40%] text-fuchsia-70
               <dd v-for="t in meta.tags" :key="t" class="text-sm px-2 py-0.5" :class="hue.strong">{{ t }}</dd>
             </div>
           </dl>
+          </div>
 
           <nav v-if="body?.headings.length" aria-label="Contents" class="hidden sm:flex flex-col gap-2 p-4 print:hidden" :class="hue.soft">
             <p class="text-sm font-semibold opacity-70">On this page</p>
