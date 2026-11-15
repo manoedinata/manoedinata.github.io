@@ -74,11 +74,6 @@ contacts:
     href: "https://t.me/manoedinata"
     hue: indigo
 
-  - label: Blog
-    icon: pen
-    href: "/writings/"
-    hue: blue
-
 # "Other doings": one card per category
 projects:
   - icon: briefcase
