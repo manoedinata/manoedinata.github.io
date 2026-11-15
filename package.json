@@ -5,16 +5,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync:notion": "node scripts/notion-sync.js"
   },
   "dependencies": {
     "vue": "^3.5.45",
     "vue-router": "^5.5.0"
   },
   "devDependencies": {
+    "@notionhq/client": "^5.31.1",
     "@tailwindcss/vite": "^4.3.5",
     "@vitejs/plugin-vue": "^6.0.10",
     "marked": "^18.2.0",
+    "notion-to-md": "^3.1.10",
     "shiki": "^4.6.0",
     "tailwindcss": "^4.3.5",
     "vite": "^8.3.8",

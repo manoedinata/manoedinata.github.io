@@ -5,6 +5,7 @@
 //
 // Drafts (`draft: true`) render in `vite dev` only; a build drops their content entirely.
 // Fenced code is highlighted at build time by Shiki (light + dark colours as CSS vars, no runtime JS).
+// Relative image paths (`![](photo.png)`) resolve to public/writings/<slug>/, where the Notion sync puts them.
 
 import { readFileSync, readdirSync, mkdirSync, writeFileSync, existsSync } from 'node:fs'
 import { basename, join } from 'node:path'
@@ -54,8 +55,11 @@ const COPY_ICONS =
   `<span class="icon-copy">${svg('<path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="M9 3h6v4H9z"/>')}</span>` +
   `<span class="icon-done">${svg('<path d="M5 12l5 5L20 7"/>')}</span>`
 
-/** `hl`: a loaded Shiki highlighter; without one, code blocks stay plain (fine for metadata). */
-export function readPost(file, hl = null) {
+/**
+ * `hl`: a loaded Shiki highlighter; without one, code blocks stay plain (fine for metadata).
+ * `base`: the site's base URL, for relative image paths.
+ */
+export function readPost(file, hl = null, base = '/') {
   const src = readFileSync(file, 'utf8')
   const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(src)
   const front = (match && parseYaml(match[1])) || {}
@@ -85,6 +89,11 @@ export function readPost(file, hl = null) {
         const out = highlight(hl, text, (lang || '').split(/\s/)[0]) ?? `<pre><code>${escapeHtml(text)}</code></pre>`
         // Post.vue handles clicks on .copy (event delegation).
         return `<div class="code-block"><button type="button" class="copy" aria-label="Copy code" title="Copy">${COPY_ICONS}</button>${out}</div>\n`
+      },
+      image({ href, title, text }) {
+        const src = /^([a-z][a-z0-9+.-]*:|\/|#)/i.test(href) ? href : `${base}writings/${slug}/${href}`
+        const t = title ? ` title="${escapeHtml(title)}"` : ''
+        return `<img src="${escapeHtml(src)}" alt="${escapeHtml(text)}"${t} loading="lazy">`
       },
     },
   })
@@ -132,7 +141,7 @@ export default function posts({ siteTitle }) {
     async transform(code, id) {
       const [file, query] = id.split('?')
       if (!file.endsWith('.md') || !file.startsWith(POSTS_DIR)) return
-      const post = readPost(file, query === 'meta' ? null : await getHighlighter())
+      const post = readPost(file, query === 'meta' ? null : await getHighlighter(), config.base)
       const hidden = post.meta.draft && config.command === 'build'
       const value = hidden ? null : query === 'meta' ? post.meta : { html: post.html, headings: post.headings }
       return { code: `export default ${JSON.stringify(value)}`, map: null }

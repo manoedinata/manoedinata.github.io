@@ -1,0 +1,52 @@
+name: Sync Notion posts
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write # to start the deploy workflow
+
+concurrency:
+  group: notion-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run sync:notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+
+      # Fail here rather than commit a post that breaks the site.
+      - run: npm run build
+
+      - name: Commit and deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add src/posts public/writings
+          if git diff --cached --quiet; then
+            echo "No changes from Notion."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "feat: sync posts from notion"
+          git pull --rebase
+          git push
+          # Pushes made with GITHUB_TOKEN don't trigger other workflows, so start the deploy by hand.
+          gh workflow run deploy.yml --ref "${GITHUB_REF_NAME}"
